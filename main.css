@@ -40,7 +40,7 @@ nav {
   height: 25px;
   border: 0;
 /* Slider handle height */
-  background: url('scatter_plot.png'); /* Green background */
+/* background: url('scatter_plot.png'); /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -48,7 +48,7 @@ nav {
   width: 25px; /* Set a specific slider handle width */
   height: 15px; /* Slider handle height */
   border: 0;
-  background: url('scatter_plot.png'); /* Green background */
+  background: url('images/scatter_plot.png'); /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
 </style>

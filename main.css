@@ -14,6 +14,10 @@ nav {
 {
    display: inline;
 }
+#Rocket_Low1, #Rocket_Mid1, #Rocket_High1
+{
+	display: inline;
+}
 
 .slidecontainer {
   width: 100%; /* Width of the outside container */

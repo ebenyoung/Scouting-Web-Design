@@ -4,14 +4,14 @@
 <head>
   <title>Scouting Web!</title>
   <script>
-	function displaySliderValue(){
+	function displayCargoType(){
 		var slider = document.getElementById("myRange");
 		var output = document.getElementById("demo");
 		console.log(slider.value);
 		output.innerHTML = slider.value; // Display the default slider value
 		// Update the current slider value (each time you drag the slider handle)
 	}
-	function displaySliderValue(){
+	function displayHatchPanelType(){
 		var slider = document.getElementById("biRange");
 		var output = document.getElementById("bemo");
 		console.log(slider.value);
@@ -80,7 +80,7 @@ function myFunction() {
           <span class="navbar-toggler-icon"></span>
           <span class="navbar-toggler-icon"></span>
         </button>
-		<a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+		<a class="navbar-brand" href="#EndGame">
 		<i class="material-icons">flag</i> End Game
           </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -250,7 +250,7 @@ function myFunction() {
         <h2><a id="Cargo">Cargo</a></h2>
 		<div> Cargo Ship
 		<div class="slidecontainer">
-			<input type="range" min="1" max="10" value="10" class="slider" id="myRange" onchange="displaySliderValue();" onload="displaySliderValue();">
+			<input type="range" min="0" max="10" value="10" class="slider" id="myRange" onchange="displayCargoType();" onload="displayCargoType();">
 			<p>Value: <span id="demo"></span></p>
 	</div>
         </div>
@@ -298,14 +298,100 @@ function myFunction() {
 	</div>
 	</div>
 	</div>
+	</div>
+	</div>
+	</div>
 	<div class="main main-unraised">
         <h2><a id="HatchPanels">Hatch Panels</a></h2>
 		<div> Cargo Ship
 		<div class="slidecontainer">
-			<input type="range" min="1" max="10" value="10" class="slider" id="biRange" onchange="displaySliderValue();" onload="displaySliderValue();">
+			<input type="range" min="0" max="10" value="10" class="slider" id="biRange" onchange="displayHatchPanelType();" onload="displayHatchPanelType();">
 			<p>Value: <span id="bemo"></span></p>
 	</div>
         </div>
+	<div> Rocket Low-Mid-High
+	<div>
+		<div id="Rocket_Low1">
+		<select size="1">
+			<option value="1 low1">1</option>
+			<option value="2 low1">2</option>
+			<option value="3 low1">3</option>
+			<option value="4 low1">4</option>
+			<option value="5 low1">5</option>
+			<option value="6 low1">6</option>
+			<option value="7 low1">7</option>
+			<option value="8 low1">8</option>
+			<option value="9 low1">9</option>
+			<option value="...">...</option>
+		</select>
+		<div id="Rocket_Mid1">
+		<select size="1">
+			<option value="1 mid1">1</option>
+			<option value="2 mid1">2</option>
+			<option value="3 mid1">3</option>
+			<option value="4 mid1">4</option>
+			<option value="5 mid1">5</option>
+			<option value="6 mid1">6</option>
+			<option value="7 mid1">7</option>
+			<option value="8 mid1">8</option>
+			<option value="9 mid1">9</option>
+			<option value="...">...</option>
+		</select>
+		<div id="Rocket_High1">
+		<select size="1">
+			<option value="1 high1">1</option>
+			<option value="2 high1">2</option>
+			<option value="3 high1">3</option>
+			<option value="4 high1">4</option>
+			<option value="5 high1">5</option>
+			<option value="6 high1">6</option>
+			<option value="7 high1">7</option>
+			<option value="8 high1">8</option>
+			<option value="9 high1">9</option>
+			<option value="...">...</option>
+		</select>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="main main-unraised">
+       <h2><a id="EndGame">End Game</a></h2>
+		<div> Hab Level
+		<div>
+		<div class="form-check form-check-inline">
+		<label class="form-check-label" for="EndGameLevel">
+			<input type="checkbox" class="form-check-input" id="EndGameLevel" name="EndGameHab" value="option13">1
+			<span class="form-check-sign"><span class="check"></span></span>
+		</label>
+    </div>
+		<div class="form-check form-check-inline">
+		<label class="form-check-label" for="EndGameLevel1">
+			<input type="checkbox" class="form-check-input" id="EndGameLevel1" name="EndGameHab" value="option14">2
+			<span class="form-check-sign"><span class="check"></span></span>
+		</label>
+    </div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="EndGameLevel2">
+			<input type="checkbox" class="form-check-input" id="EndGameLevel2" name="EndGameHab" value="option15">3
+			<span class="form-check-sign"><span class="check"></span></span>
+		</label>
+    </div>
+	<div>
+	<div> Buddy Climb
+	<div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="BuddyClimbEnd">
+			<input type="checkbox" class="form-check-input" id="BuddyClimbEnd" name="BuddyClimb" value="option16">Level 2
+			<span class="form-check-sign"><span class="check"></span></span>
+		</label>
+    </div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="BuddyClimbEnd1">
+			<input type="checkbox" class="form-check-input" id="BuddyClimbEnd1" name="BuddyClimb" value="option17">Level 3
+			<span class="form-check-sign"><span class="check"></span></span>
+		</label>
+    </div>
   <footer class="footer footer-default">
     <div class="container">
       <nav class="float-left">

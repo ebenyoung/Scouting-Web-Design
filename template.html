@@ -11,7 +11,14 @@
 		output.innerHTML = slider.value; // Display the default slider value
 		// Update the current slider value (each time you drag the slider handle)
 	}
-</script>
+	function displaySliderValue(){
+		var slider = document.getElementById("biRange");
+		var output = document.getElementById("bemo");
+		console.log(slider.value);
+		output.innerHTML = slider.value; // Display the default slider value
+		// Update the current slider value (each time you drag the slider handle)
+	}
+	</script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=10.0, maximum-scale=12.0, user-scalable=0" name="viewport" />
@@ -260,6 +267,7 @@ function myFunction() {
 			<option value="7 low">7</option>
 			<option value="8 low">8</option>
 			<option value="9 low">9</option>
+			<option value="...">...</option>
 		</select>
 		<div id="Rocket_Mid">
 		<select size="1">
@@ -272,6 +280,7 @@ function myFunction() {
 			<option value="7 mid">7</option>
 			<option value="8 mid">8</option>
 			<option value="9 mid">9</option>
+			<option value="...">...</option>
 		</select>
 		<div id="Rocket_High">
 		<select size="1">
@@ -284,12 +293,19 @@ function myFunction() {
 			<option value="7 high">7</option>
 			<option value="8 high">8</option>
 			<option value="9 high">9</option>
+			<option value="...">...</option>
 		</select>
 	</div>
 	</div>
 	</div>
 	<div class="main main-unraised">
         <h2><a id="HatchPanels">Hatch Panels</a></h2>
+		<div> Cargo Ship
+		<div class="slidecontainer">
+			<input type="range" min="1" max="10" value="10" class="slider" id="biRange" onchange="displaySliderValue();" onload="displaySliderValue();">
+			<p>Value: <span id="bemo"></span></p>
+	</div>
+        </div>
   <footer class="footer footer-default">
     <div class="container">
       <nav class="float-left">

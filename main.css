@@ -23,7 +23,7 @@ nav {
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   width: 50%; /* Full-width */
-  height: 25px; /* Specified height */
+  height: 20px; /* Specified height */
   border-radius: 5px;
   background: #d3d3d3; /* Grey background */
   outline: none; /* Remove outline */
@@ -44,6 +44,7 @@ nav {
   width: 25px; /* Set a specific slider handle width */
   height: 25px;
   border: 0;
+  border-radius: 50%;
   background: #4E2490;
 /* Slider handle height */
 /* background: url('scatter_plot.png'); /* Green background */

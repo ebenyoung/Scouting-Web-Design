@@ -47,24 +47,149 @@
 </div>
 
 <script>
+
+    // global scouting info object, used to store scouting session related
+    // data between matches
+    var scoutingInfo = {};
+
+    //
+    // Function will load the scouting session info from the browser storage
+    // and preload the scouting sheet with that information
+    //
+    function loadScoutingSessionInfo() {
+        // load the stored settings from the browser storage to remember any
+        // settings that the user may have set the last time.
+        try {
+            scoutingInfo = JSON.parse( localStorage.scoutingInfo );
+            if ( scoutingInfo.scouter == null )
+                scoutingInfo.scouter = '';
+
+            $('#scouter').attr('value',scoutingInfo.scouter);
+
+        } catch(err) {
+            console.log( 'No stored settings setting up defaults' );
+
+            scoutingInfo.scouter = '';
+            localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
+        }
+        return scoutingInfo;
+    }
+
+    //
+    // Function will retrieve the match scouting data from the scouting sheet
+    // and store the contents in a local file which will be synced to the
+    // central scouting application
+    //
+    function saveScoutingData() {
+        var scoutingData = {};
+
+        scoutingData.Setup = {};
+        scoutingData.Setup.Scouter = document.getElementById('scouter').value;
+        scoutingData.Setup.Match = '1';
+        scoutingData.Setup.Alliance = 'Blue';
+        scoutingData.Setup.Position = '2';
+        scoutingData.Setup.Team = '1073';
+
+        scoutingData.Sandstorm = {};
+        scoutingData.Sandstorm.Starting_Pos = 'B2',
+        scoutingData.Sandstorm.Level_1 = '1';
+        scoutingData.Sandstorm.Level_2 = '0';
+        scoutingData.Sandstorm.Level_3 = '0';
+
+        scoutingData.Cargo = {};
+        scoutingData.Cargo.Cargo_Ship = '4';
+        scoutingData.Cargo.Low = '0';
+        scoutingData.Cargo.Med = '0';
+        scoutingData.Cargo.High = '0';
+
+        scoutingData.Hatch_Panels = {};
+        scoutingData.Hatch_Panels.Cargo_Ship = '42';
+        scoutingData.Hatch_Panels.Low = '0';
+        scoutingData.Hatch_Panels.Med = '0';
+        scoutingData.Hatch_Panels.High = '0';
+
+        scoutingData.End_Game = {};
+        scoutingData.End_Game.Level_1 = '1';
+        scoutingData.End_Game.Level_2 = '0';
+        scoutingData.End_Game.Level_3 = '0';
+        scoutingData.End_Game.Level_2_Buddy_Climb = '0';
+        scoutingData.End_Game.Level_3_Buddy_Climb = '0';
+        scoutingData.End_Game.Foul = '0';
+        scoutingData.End_Game.Tech_Foul = '0';
+
+        scoutingData.Match_Results = {};
+        scoutingData.Match_Results.Win = '1';
+        scoutingData.Match_Results.Tie = '0';
+        scoutingData.Match_Results.Loss = '0';
+        scoutingData.Match_Results.RP_Earned = '2';
+
+        scoutingInfo.scouter = scoutingData.Setup.Scouter;
+        scoutingInfo.alliance = scoutingData.Setup.Alliance;
+        scoutingInfo.position = scoutingData.Setup.Position;
+        localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
+
+        //
+        // Some of this information will be stored in the browser storage as 
+        // configuration settings. - need to complete this part.
+        var season = '2019';
+        var eventCode = 'Week0';
+        var fileName = 'Match' + scoutingData.Setup.Match + '_' + 
+                        scoutingData.Setup.Alliance + scoutingData.Setup.Position;
+        var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
+
+        $.ajax({
+            url: 'http://localhost:8080/sync' + filePath + '',
+                    type: 'PUT',
+                    data: JSON.stringify(scoutingData),
+                    crossDomain: true,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader( 'Content-Type', 'application/json' );
+                    },
+                    success: function () {
+                        alert( 'File Saved' );
+                    }
+                });
+    }
+
+    //
+    // Function will issue a request to update the scouting app from the 
+    // central server.
+    //
+    // Some of the parameters are currently hardcoded, but will be 
+    // set through configuration
+    //
+    function updateScoutingApp() {
+        var updateCntrl = {};
+        updateCntrl.sync_method = 'HTTP';
+        updateCntrl.sync_control = 'Download_Updates';
+        updateCntrl.paths = [ 'static/scouting-app/' ];
+        updateCntrl.server_address = '192.168.1.136';
+        updateCntrl.server_port = '8080';
+        updateCntrlJson = JSON.stringify(updateCntrl);
+
+        $.post( 'http://localhost:8080/sync', updateCntrlJson );
+    }
+
     $(document).ready(function() {
 
-        //loadSettings();
-        //loadSeasons('season-selections');
-        //loadCompetitions('competition-selections');
-
-        //$('#edit-settings-option').on('click', function () {
-        //    editSettings();
-        //});
+        loadScoutingSessionInfo();
 
         $('#save-option').on('click', function () {
-            alert( 'Save File!' );
+            saveScoutingData();
+        });
+
+        $('#save-button').on('click', function () {
+            saveScoutingData();
+        });
+
+        $('#update-button').on('click', function () {
+            updateScoutingApp();
         });
 
     });
+
 </script>
 
- <form action=”info.php” method=”post”>
   <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
     <div class="container">
       <div class="navbar-translate">
@@ -143,7 +268,7 @@
                       <i class="material-icons">accessibility</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Scouter">
+                  <input id=scouter type="text" class="form-control" placeholder="Scouter">
                 </div>
               </div>
 			  <div class="form-group bmd-form-group">
@@ -473,14 +598,18 @@
     </div>
 	<div>
 	<div class="col-md-8 ml-auto">
-		<button class="btn btn-primary btn-round">
-		<input type="submit" value="Sumbit" />
-		<i class="material-icons">save</i>
-		Save
-		<div class="ripple-container"></div>
-	</button>
+		<button id="save-button" class="btn btn-primary btn-round">
+		<i class="material-icons">save</i> Save
+	    </button>
 	</div>
-	</form>
+
+	<div class="col-md-8 ml-auto">
+		<button id="update-button" class="btn btn-primary btn-round">
+		<i class="material-icons">apps</i> Update Scouting App
+	    </button>
+	</div>
+
+
   <footer class="footer footer-default">
     <div class="container">
       <nav class="float-left">

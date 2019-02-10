@@ -83,18 +83,43 @@
     function saveScoutingData() {
         var scoutingData = {};
 
+        //
+        // Retrieve the settings from the scouting sheet page by their 'id' value. I 
+        // did the scouter and match number fields as an example. You'll need to do the
+        // same for the other data fields.
+        //
+        // This scoutingData object contains all the fields that Taylor's sheet lists for a
+        // match. You're going to need to match these fields up to what you have on the
+        // page and make sure that all are covered. Let me know if you have any questions 
+        // with the individual fields
+        //
         scoutingData.Setup = {};
         scoutingData.Setup.Scouter = document.getElementById('scouter').value;
-        scoutingData.Setup.Match = '1';
+        scoutingData.Setup.Match = document.getElementById('match-number').value;
         scoutingData.Setup.Alliance = 'Blue';
         scoutingData.Setup.Position = '2';
         scoutingData.Setup.Team = '1073';
 
         scoutingData.Sandstorm = {};
-        scoutingData.Sandstorm.Starting_Pos = 'B2',
-        scoutingData.Sandstorm.Level_1 = '1';
+        // don't worry about the starting position. It's the same as the alliance/position above.
+        scoutingData.Sandstorm.Starting_Pos = 'B2';
+
+        // Where did the robot start? 
+
+        // Initialize all start level fields to '0'
+        scoutingData.Sandstorm.Level_1 = '0';
         scoutingData.Sandstorm.Level_2 = '0';
         scoutingData.Sandstorm.Level_3 = '0';
+        
+        // Set the level that the robot started on. Because you used the 'form-check' class for
+        // the objects, you can simply reference the state of the radio element. 
+        if ( document.getElementById('SandStormInline').checked ) {
+            scoutingData.Sandstorm.Level_1 = '1';
+        } else if ( document.getElementById('SandStormInline1').checked ) {
+            scoutingData.Sandstorm.Level_2 = '1';
+        } else if ( document.getElementById('SandStormInline2').checked ) {
+            scoutingData.Sandstorm.Level_3 = '1';
+        }
 
         scoutingData.Cargo = {};
         scoutingData.Cargo.Cargo_Ship = '4';
@@ -123,6 +148,11 @@
         scoutingData.Match_Results.Loss = '0';
         scoutingData.Match_Results.RP_Earned = '2';
 
+        //
+        // Update the scouting session information with the 
+        // current settings and store to the browser's 
+        // local storage.
+        //
         scoutingInfo.scouter = scoutingData.Setup.Scouter;
         scoutingInfo.alliance = scoutingData.Setup.Alliance;
         scoutingInfo.position = scoutingData.Setup.Position;
@@ -289,7 +319,7 @@
                     </span>
                   </div>
 				  <div class="col-lg-3 col-sm-4" style="width:100px, height:100px" >
-                  <input type="number" class="form-control" placeholder="Match Number" min="1" max="130">
+                  <input id="match-number" type="number" class="form-control" placeholder="Match Number" min="1" max="130">
                 </div>
               </div>
 			  </div>

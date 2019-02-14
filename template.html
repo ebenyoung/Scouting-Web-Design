@@ -97,27 +97,24 @@
         scoutingData.Setup.Scouter = document.getElementById('scouter').value;
         scoutingData.Setup.Match = document.getElementById('match-number').value;
 		
-        scoutingData.Setup.Alliance = 'Blue'
-		
 		if ( document.getElementById('AllianceInline').checked ) {
-            scoutingData.Setup.Alliance = '1';
+            scoutingData.Setup.Alliance = 'Red';
         } else if ( document.getElementById('AllianceInline1').checked ) {
-            scoutingData.Setup.Alliance = '1';
+            scoutingData.Setup.Alliance = 'Blue';
 		}
-        scoutingData.Setup.Position = '2';
 		
 		if ( document.getElementById('RobotInline').checked ) {
             scoutingData.Setup.Position = '1';
         } else if ( document.getElementById('RobotInline1').checked ) {
-            scoutingData.Setup.Position = '1';
+            scoutingData.Setup.Position = '2';
         } else if ( document.getElementById('RobotInline2').checked ) {
-            scoutingData.Setup.Position = '1';
+            scoutingData.Setup.Position = '3';
         }
         scoutingData.Setup.Team = document.getElementById('teamnumber').value;
 
         scoutingData.Sandstorm = {};
-        // don't worry about the starting position. It's the same as the alliance/position above.
-        scoutingData.Sandstorm.Starting_Pos = 'B2';
+
+        scoutingData.Sandstorm.Starting_Pos = scoutingData.Setup.Alliance[0]+scoutingData.Setup.Position;
 
         // Where did the robot start? 
 
@@ -182,6 +179,7 @@
                         scoutingData.Setup.Alliance + scoutingData.Setup.Position;
         var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
 
+        //    url: 'http://localhost:8080/sync' + filePath + '?sync=true&debug=true',
         $.ajax({
             url: 'http://localhost:8080/sync' + filePath + '',
                     type: 'PUT',
@@ -191,7 +189,7 @@
                         xhr.setRequestHeader( 'Content-Type', 'application/json' );
                     },
                     success: function () {
-                        alert( 'File Saved' );
+                        console.log( 'Scouting Data Saved To: ' + filepath );
                     }
                 });
     }
@@ -203,7 +201,7 @@
     // Some of the parameters are currently hardcoded, but will be 
     // set through configuration
     //
-    function updateScoutingApp() {
+    function updateScoutingApp(recurse_param) {
         var updateCntrl = {};
         updateCntrl.sync_method = 'HTTP';
         updateCntrl.sync_control = 'Download_Updates';
@@ -212,7 +210,36 @@
         updateCntrl.server_port = '8080';
         updateCntrlJson = JSON.stringify(updateCntrl);
 
-        $.post( 'http://localhost:8080/sync', updateCntrlJson );
+        $.post( 'http://localhost:8080/sync'+recurse_param, updateCntrlJson )
+                .done(function( data ) {
+                    setTimeout(function(){ location.reload; }, 5000);
+                });
+    }
+    function updateScoutingAppHTML() {
+        updateScoutingApp('');
+    }
+    function updateScoutingAppAll() {
+        updateScoutingApp('?recurse=true');
+    }
+
+    //
+    // Function will issue a request to sync the scouting data files with
+    // central server.
+    //
+    // Some of the parameters are currently hardcoded, but will be 
+    // set through configuration
+    //
+    function syncScoutingFiles() {
+        var updateCntrl = {};
+        updateCntrl.sync_method = 'Bluetooth';
+        updateCntrl.sync_control = 'Upload_Only';
+        updateCntrl.paths = [ 'static/data/Week02019/ScoutingData/' ];
+        updateCntrlJson = JSON.stringify(updateCntrl);
+
+        $.post( 'http://localhost:8080/sync', updateCntrlJson )
+                .done(function( data ) {
+                    setTimeout(function(){ location.reload; }, 5000);
+                });
     }
 
     $(document).ready(function() {
@@ -227,8 +254,14 @@
             saveScoutingData();
         });
 
-        $('#update-button').on('click', function () {
-            updateScoutingApp();
+        $('#update-app-all').on('click', function () {
+            updateScoutingAppAll();
+        });
+        $('#update-app-html').on('click', function () {
+            updateScoutingAppHTML();
+        });
+        $('#sync-option').on('click', function () {
+            syncScoutingFiles();
         });
 
     });
@@ -241,30 +274,12 @@
         <a class="navbar-brand" href="#SandStorm">
 		<img src="images/SandStorm.png" class="icon"></img> SandStorm
           </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
 		<a class="navbar-brand" href="#Cargo">
 		<i class="material-icons">scatter_plot</i> Cargo
           </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
 		<a class="navbar-brand" href="#HatchPanels">
 		<i class="material-icons">album</i> Hatch Panels
           </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
 		<a class="navbar-brand" href="#EndGame">
 		<i class="material-icons">flag</i> End Game
           </a>
@@ -284,6 +299,21 @@
           <li id="save-option" class="nav-item">
             <a href="#" class="nav-link">
               <i class="material-icons">save</i> Save
+            </a>
+          </li>
+          <li id="update-app-html" class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="material-icons">apps</i> Update Scouting App
+            </a>
+          </li>
+          <li id="update-app-all" class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="material-icons">folder</i> Update Scouting Libs
+            </a>
+          </li>
+          <li id="sync-option" class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="material-icons">import_export</i> Sync
             </a>
           </li>
         </ul>
@@ -460,7 +490,7 @@
         <h2><a id="Cargo">Cargo</a></h2>
 		<div> Cargo Ship
 		<div class="slidecontainer">
-			<input type="range" min="0" max="10" value="10" class="slider" id="myRange" oninput="displayCargoType();" onload="displayCargoType();">
+			<input type="range" min="0" max="10" value="0" class="slider" id="myRange" oninput="displayCargoType();" onload="displayCargoType();">
 			<p>Value: <span id="demo"></span></p>
 	</div>
         </div>
@@ -515,7 +545,7 @@
         <h2><a id="HatchPanels">Hatch Panels</a></h2>
 		<div> Cargo Ship
 		<div class="slidecontainer">
-			<input type="range" min="0" max="10" value="10" class="slider" id="biRange" oninput="displayHatchPanelType();" onload="displayHatchPanelType();">
+			<input type="range" min="0" max="10" value="0" class="slider" id="biRange" oninput="displayHatchPanelType();" onload="displayHatchPanelType();">
 			<p>Value: <span id="bemo"></span></p>
 	</div>
         </div>
@@ -624,12 +654,12 @@
               </div>
 	<div class="main main-unraised">
        <h2><a id="MatchResult">Match Results</a></h2>
-	   <div class="form-check form-check-inline">
+    </div>
+	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="MatchResultEnd">
 			<input type="radio" class="form-check-input" id="MatchResultEnd" name="MatchResult">Tie
 			<span class="circle"><span class="check"></span></span>
 		</label>
-    </div>
 	</div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="MatchResultEnd1">
@@ -645,17 +675,23 @@
     </div>
 	<div>
 
-	<div class="col-md-8 ml-auto">
+    <div>
+        <br>
+	<div>
+
+	<div class="col-md-12 ml-auto">
 		<button id="save-button" class="btn btn-primary btn-round">
 		<i class="material-icons">save</i> Save
 	    </button>
 	</div>
 
+  <!--
 	<div class="col-md-8 ml-auto">
 		<button id="update-button" class="btn btn-primary btn-round">
 		<i class="material-icons">apps</i> Update Scouting App
 	    </button>
 	</div>
+  -->
 
   <footer class="footer footer-default">
     <div class="container">

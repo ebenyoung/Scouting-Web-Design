@@ -18,6 +18,24 @@
 		output.innerHTML = slider.value; // Display the default slider value
 		// Update the current slider value (each time you drag the slider handle)
 	}
+	$(document).ready(function(){
+
+	var CargoRocketLow=0;
+		$('.CargoRocketLowAdd').click(function(e){
+        
+        // Stop acting like a button
+        e.preventDefault();
+        // Get the field name
+        var CargoRocketLow = parseInt($('#CargoRocketLow').val());
+        
+        // If is not undefined
+            
+            $('#CargoRocketLow').val(CargoRocketLow + 1);
+
+          
+            // Increment
+        
+    });
 	</script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -501,8 +519,8 @@
 			<i class="material-icons">remove</i>
 	    </button>
             <input id="CargoRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
-				<button id="CargoButtonAdd" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
+			<button id="CargoButtonAdd" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
 		</button>
 		</div>
 		<div class="col-md-12 ml-auto">
@@ -510,10 +528,10 @@
 			<i class="material-icons">remove</i>
 		</button>
 			<input id="CargoRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
-				<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
-				</button>
-                </div>
+			<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+        </div>
 		<div class="col-md-12 ml-auto">
 			<button id="CargoButtonRemove2" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
@@ -544,7 +562,7 @@
 			<i class="material-icons">remove</i>
 	    </button>
             <input id="HatchPanelRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
-				<button id="CargoButtonAdd" class="btn btn-primary btn-round">
+				<button id="HatchPanelButtonAdd" class="btn btn-primary btn-round">
 				<i class="material-icons">add</i>
 		</button>
 		</div>
@@ -553,7 +571,7 @@
 			<i class="material-icons">remove</i>
 		</button>
 			<input id="HatchPanelRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
-				<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
+				<button id="HatchPanelButtonAdd1" class="btn btn-primary btn-round">
 				<i class="material-icons">add</i>
 				</button>
                 </div>

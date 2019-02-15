@@ -114,6 +114,7 @@
             scoutingData.Setup.Position = '1';
         }
         scoutingData.Setup.Team = document.getElementById('teamnumber').value;
+		scoutingData.Setup.//What are the names reference to, user created.
 
         scoutingData.Sandstorm = {};
         // don't worry about the starting position. It's the same as the alliance/position above.
@@ -138,18 +139,26 @@
 
         scoutingData.Cargo = {};
         scoutingData.Cargo.Cargo_Ship = '4';
-        scoutingData.Cargo.Low = '0';
-        scoutingData.Cargo.Med = '0';
-        scoutingData.Cargo.High = '0';
+        scoutingData.Cargo.Low = document.getElementById('Rocket_Low').value;
+        scoutingData.Cargo.Med = document.getElementById('Rocket_Mid').value;
+        scoutingData.Cargo.High = document.getElementById('Rocket_High').value;
 
         scoutingData.Hatch_Panels = {};
         scoutingData.Hatch_Panels.Cargo_Ship = '42';
-        scoutingData.Hatch_Panels.Low = '0';
-        scoutingData.Hatch_Panels.Med = '0';
-        scoutingData.Hatch_Panels.High = '0';
+        scoutingData.Hatch_Panels.Low = document.getElementById('Rocket_Low1').value;
+        scoutingData.Hatch_Panels.Med = document.getElementById('Rocket_Mid1').value;
+        scoutingData.Hatch_Panels.High = document.getElementById('Rocket_High1').value;
 
         scoutingData.End_Game = {};
         scoutingData.End_Game.Level_1 = '1';
+		
+		if ( document.getElementById('EndGameLevel').checked ) {
+            scoutingData.End_Game.Level_1 = '1';
+        } else if ( document.getElementById('EndGameLevel1').checked ) {
+            scoutingData.End_Game.Level_2 = '1';
+        } else if ( document.getElementById('EndGameLevel2').checked ) {
+            scoutingData.End_Game.Level_3 = '1';
+        }
         scoutingData.End_Game.Level_2 = '0';
         scoutingData.End_Game.Level_3 = '0';
         scoutingData.End_Game.Level_2_Buddy_Climb = '0';

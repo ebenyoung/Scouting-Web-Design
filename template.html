@@ -134,7 +134,7 @@
         }
 
         scoutingData.Cargo = {};
-        scoutingData.Cargo.Cargo_Ship = '4';
+        scoutingData.Cargo.Cargo_Ship = '42';
         scoutingData.Cargo.Low = '0';
         scoutingData.Cargo.Med = '0';
         scoutingData.Cargo.High = '0';
@@ -496,45 +496,34 @@
         </div>
 	<div> Rocket Low-Mid-High
 	<div>
-		<div id="Rocket_Low">
-		<select size="1">
-			<option value="1 low">1</option>
-			<option value="2 low">2</option>
-			<option value="3 low">3</option>
-			<option value="4 low">4</option>
-			<option value="5 low">5</option>
-			<option value="6 low">6</option>
-			<option value="7 low">7</option>
-			<option value="8 low">8</option>
-			<option value="9 low">9</option>
-			<option value="...">...</option>
-		</select>
-		<div id="Rocket_Mid">
-		<select size="1">
-			<option value="1 mid">1</option>
-			<option value="2 mid">2</option>
-			<option value="3 mid">3</option>
-			<option value="4 mid">4</option>
-			<option value="5 mid">5</option>
-			<option value="6 mid">6</option>
-			<option value="7 mid">7</option>
-			<option value="8 mid">8</option>
-			<option value="9 mid">9</option>
-			<option value="...">...</option>
-		</select>
-		<div id="Rocket_High">
-		<select size="1">
-			<option value="1 high">1</option>
-			<option value="2 high">2</option>
-			<option value="3 high">3</option>
-			<option value="4 high">4</option>
-			<option value="5 high">5</option>
-			<option value="6 high">6</option>
-			<option value="7 high">7</option>
-			<option value="8 high">8</option>
-			<option value="9 high">9</option>
-			<option value="...">...</option>
-		</select>
+	<div class="col-md-12 ml-auto">
+			<button id="CargoButtonRemove" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+            <input id="CargoRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
+				<button id="CargoButtonAdd" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+		</button>
+		</div>
+		<div class="col-md-12 ml-auto">
+			<button id="CargoButtonRemove1" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+			<input id="CargoRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
+				<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+				</button>
+                </div>
+		<div class="col-md-12 ml-auto">
+			<button id="CargoButtonRemove2" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+            <input id="CargoRocketHigh" type="text" placeholder="High Rocket" min="0" max="4">
+				<button id="CargoButtonAdd2" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+		</button>
+		</div>
+				
 	</div>
 	</div>
 	</div>
@@ -550,49 +539,33 @@
 	</div>
         </div>
 	<div> Rocket Low-Mid-High
-	<div>
-		<div id="Rocket_Low1">
-		<select size="1">
-			<option value="1 low1">1</option>
-			<option value="2 low1">2</option>
-			<option value="3 low1">3</option>
-			<option value="4 low1">4</option>
-			<option value="5 low1">5</option>
-			<option value="6 low1">6</option>
-			<option value="7 low1">7</option>
-			<option value="8 low1">8</option>
-			<option value="9 low1">9</option>
-			<option value="...">...</option>
-		</select>
-		<div id="Rocket_Mid1">
-		<select size="1">
-			<option value="1 mid1">1</option>
-			<option value="2 mid1">2</option>
-			<option value="3 mid1">3</option>
-			<option value="4 mid1">4</option>
-			<option value="5 mid1">5</option>
-			<option value="6 mid1">6</option>
-			<option value="7 mid1">7</option>
-			<option value="8 mid1">8</option>
-			<option value="9 mid1">9</option>
-			<option value="...">...</option>
-		</select>
-		<div id="Rocket_High1">
-		<select size="1">
-			<option value="1 high1">1</option>
-			<option value="2 high1">2</option>
-			<option value="3 high1">3</option>
-			<option value="4 high1">4</option>
-			<option value="5 high1">5</option>
-			<option value="6 high1">6</option>
-			<option value="7 high1">7</option>
-			<option value="8 high1">8</option>
-			<option value="9 high1">9</option>
-			<option value="...">...</option>
-		</select>
-	</div>
-	</div>
-	</div>
+	<div class="col-md-12 ml-auto">
+			<button id="HatchPanelButtonRemove" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+            <input id="HatchPanelRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
+				<button id="CargoButtonAdd" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+		</button>
+		</div>
+		<div class="col-md-12 ml-auto">
+			<button id="HatchPanelButtonRemove1" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+			<input id="HatchPanelRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
+				<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+				</button>
+                </div>
+		<div class="col-md-12 ml-auto">
+			<button id="HatchPanelButtonRemove2" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+            <input id="HatchPanelRocketHigh" type="text" placeholder="High Rocket" min="0" max="4">
+				<button id="HatchPanelButtonAdd2" class="btn btn-primary btn-round">
+				<i class="material-icons">add</i>
+		</button>
+		</div>
 	</div>
 	</div>
 	<div class="main main-unraised">
@@ -640,6 +613,16 @@
                     </span>
                   </div>
                   <input type="text" class="form-control" placeholder="Foul Info">
+                </div>
+              </div>
+	<div class="form-group bmd-form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="material-icons">report_problem</i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Tech Foul Info">
                 </div>
               </div>
 	<div class="form-group bmd-form-group">

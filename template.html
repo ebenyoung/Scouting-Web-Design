@@ -18,24 +18,7 @@
 		output.innerHTML = slider.value; // Display the default slider value
 		// Update the current slider value (each time you drag the slider handle)
 	}
-	$(document).ready(function(){
 
-	var CargoRocketLow=0;
-		$('.CargoRocketLowAdd').click(function(e){
-        
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        var CargoRocketLow = parseInt($('#CargoRocketLow').val());
-        
-        // If is not undefined
-            
-            $('#CargoRocketLow').val(CargoRocketLow + 1);
-
-          
-            // Increment
-        
-    });
 	</script>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -114,6 +97,9 @@
         scoutingData.Setup = {};
         scoutingData.Setup.Scouter = document.getElementById('scouter').value;
         scoutingData.Setup.Match = document.getElementById('match-number').value;
+        if ( scoutingData.Setup.Match == '' ) {
+            alert( 'Please Enter The Match Number' );
+        }
 		
 		if ( document.getElementById('AllianceInline').checked ) {
             scoutingData.Setup.Alliance = 'Red';
@@ -260,6 +246,16 @@
                 });
     }
 
+    function buttonMinus(elem) {
+        var value = parseInt(elem.val());
+        if ( value > 0 )
+            elem.val(value - 1);
+    }
+    function buttonPlus(elem) {
+        var value = parseInt(elem.val());
+        elem.val(value + 1);
+    }
+
     $(document).ready(function() {
 
         loadScoutingSessionInfo();
@@ -280,6 +276,45 @@
         });
         $('#sync-option').on('click', function () {
             syncScoutingFiles();
+        });
+
+        
+        $('#CargoButtonRemove').on('click', function () {
+            buttonMinus($('#CargoRocketLow'));
+        });
+        $('#CargoButtonAdd').on('click', function () {
+            buttonPlus($('#CargoRocketLow'));
+        });
+        $('#CargoButtonRemove1').on('click', function () {
+            buttonMinus($('#CargoRocketMid'));
+        });
+        $('#CargoButtonAdd1').on('click', function () {
+            buttonPlus($('#CargoRocketMid'));
+        });
+        $('#CargoButtonRemove2').on('click', function () {
+            buttonMinus($('#CargoRocketHigh'));
+        });
+        $('#CargoButtonAdd2').on('click', function () {
+            buttonPlus($('#CargoRocketHigh'));
+        });
+
+        $('#HatchPanelButtonRemove').on('click', function () {
+            buttonMinus($('#HatchPanelRocketLow'));
+        });
+        $('#HatchPanelButtonAdd').on('click', function () {
+            buttonPlus($('#HatchPanelRocketLow'));
+        });
+        $('#HatchPanelButtonRemove1').on('click', function () {
+            buttonMinus($('#HatchPanelRocketMid'));
+        });
+        $('#HatchPanelButtonAdd1').on('click', function () {
+            buttonPlus($('#HatchPanelRocketMid'));
+        });
+        $('#HatchPanelButtonRemove2').on('click', function () {
+            buttonMinus($('#HatchPanelRocketHigh'));
+        });
+        $('#HatchPanelButtonAdd2').on('click', function () {
+            buttonPlus($('#HatchPanelRocketHigh'));
         });
 
     });
@@ -303,9 +338,6 @@
           </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
-          <span class="navbar-toggler-icon"></span>
         </button>
 		
       </div>
@@ -504,43 +536,45 @@
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
+
 	<div class="main main-unraised">
         <h2><a id="Cargo">Cargo</a></h2>
 		<div> Cargo Ship
 		<div class="slidecontainer">
 			<input type="range" min="0" max="10" value="0" class="slider" id="myRange" oninput="displayCargoType();" onload="displayCargoType();">
 			<p>Value: <span id="demo"></span></p>
-	</div>
-        </div>
+	    </div>
+	    </div>
+
 	<div> Rocket Low-Mid-High
 	<div>
-	<div class="col-md-12 ml-auto">
-			<button id="CargoButtonRemove" class="btn btn-primary btn-round">
+	<div class="col-md-12 ml-auto"> Low Rocket
+		<button id="CargoButtonRemove" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 	    </button>
-            <input id="CargoRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
-			<button id="CargoButtonAdd" class="btn btn-primary btn-round">
+        <input id="CargoRocketLow" type="text" value="0" min="0" max="4">
+		<button id="CargoButtonAdd" class="btn btn-primary btn-round">
 			<i class="material-icons">add</i>
 		</button>
-		</div>
-		<div class="col-md-12 ml-auto">
-			<button id="CargoButtonRemove1" class="btn btn-primary btn-round">
+    </div>
+	<div class="col-md-12 ml-auto"> Mid Rocket
+		<button id="CargoButtonRemove1" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 		</button>
-			<input id="CargoRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
-			<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
+		<input id="CargoRocketMid" type="text" value="0" min="0" max="4">
+		<button id="CargoButtonAdd1" class="btn btn-primary btn-round">
 			<i class="material-icons">add</i>
 		</button>
-        </div>
-		<div class="col-md-12 ml-auto">
-			<button id="CargoButtonRemove2" class="btn btn-primary btn-round">
+    </div>
+	<div class="col-md-12 ml-auto">High Rocket
+		<button id="CargoButtonRemove2" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 	    </button>
-            <input id="CargoRocketHigh" type="text" placeholder="High Rocket" min="0" max="4">
-				<button id="CargoButtonAdd2" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
+        <input id="CargoRocketHigh" type="text" value="0" min="0" max="4">
+		<button id="CargoButtonAdd2" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
 		</button>
-		</div>
+	</div>
 				
 	</div>
 	</div>
@@ -557,34 +591,35 @@
 	</div>
         </div>
 	<div> Rocket Low-Mid-High
-	<div class="col-md-12 ml-auto">
-			<button id="HatchPanelButtonRemove" class="btn btn-primary btn-round">
+	<div class="col-md-12 ml-auto"> Low Rocket
+		<button id="HatchPanelButtonRemove" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 	    </button>
-            <input id="HatchPanelRocketLow" type="text" placeholder="Low Rocket" min="0" max="4">
-				<button id="HatchPanelButtonAdd" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
+        <input id="HatchPanelRocketLow" type="text" value="0" min="0" max="4">
+		<button id="HatchPanelButtonAdd" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
 		</button>
-		</div>
-		<div class="col-md-12 ml-auto">
-			<button id="HatchPanelButtonRemove1" class="btn btn-primary btn-round">
-			<i class="material-icons">remove</i>
-		</button>
-			<input id="HatchPanelRocketMid" type="text" placeholder="Mid Rocket" min="0" max="4">
-				<button id="HatchPanelButtonAdd1" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
-				</button>
-                </div>
-		<div class="col-md-12 ml-auto">
-			<button id="HatchPanelButtonRemove2" class="btn btn-primary btn-round">
-			<i class="material-icons">remove</i>
-	    </button>
-            <input id="HatchPanelRocketHigh" type="text" placeholder="High Rocket" min="0" max="4">
-				<button id="HatchPanelButtonAdd2" class="btn btn-primary btn-round">
-				<i class="material-icons">add</i>
-		</button>
-		</div>
 	</div>
+	<div class="col-md-12 ml-auto"> Mid Rocket
+		<button id="HatchPanelButtonRemove1" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+		<input id="HatchPanelRocketMid" type="text" value="0" min="0" max="4">
+		<button id="HatchPanelButtonAdd1" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+    </div>
+	<div class="col-md-12 ml-auto">High Rocket
+		<button id="HatchPanelButtonRemove2" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+        <input id="HatchPanelRocketHigh" type="text" value="0" min="0" max="4">
+		<button id="HatchPanelButtonAdd2" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+	</div>
+	</div>
+
 	</div>
 	<div class="main main-unraised">
        <h2><a id="EndGame">End Game</a></h2>

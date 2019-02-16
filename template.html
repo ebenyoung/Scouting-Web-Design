@@ -189,8 +189,9 @@
             scoutingData.End_Game.Level_3_Buddy_Climb = '1';
         }
 
-        scoutingData.End_Game.Foul = '0';
-        scoutingData.End_Game.Tech_Foul = '0';
+        scoutingData.End_Game.Foul = document.getElementById('FoulInfo').value;
+        scoutingData.End_Game.Tech_Foul = document.getElementById('TechFoulInfo').value;
+		scoutingData.End_Game.Notes = document.getElementById('Notes').value;
 
         scoutingData.Match_Results = {};
         scoutingData.Match_Results.Win = '0';
@@ -715,7 +716,7 @@
                       <i class="material-icons">assignment_late</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Foul Info">
+                  <input type="text" id="FoulInfo" class="form-control" placeholder="Foul Info">
                 </div>
               </div>
 	<div class="form-group bmd-form-group">
@@ -725,17 +726,17 @@
                       <i class="material-icons">report_problem</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Tech Foul Info">
+                  <input type="text" id="TechFoulInfo" class="form-control" placeholder="Tech Foul Info">
                 </div>
               </div>
 	<div class="form-group bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">report_problem</i>
+                      <i class="material-icons">feedback</i>
                     </span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Tech Foul Info">
+                  <input type="text" id="Notes" class="form-control" placeholder="Notes">
                 </div>
               </div>
 	<div class="main main-unraised">

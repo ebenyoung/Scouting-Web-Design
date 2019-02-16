@@ -307,6 +307,13 @@
         elem.val(value + 1);
 		if (value > 7 )
 			elem.val(value - 1);
+	}		
+	function buttonPlusMatch(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 129)
+			elem.val(value - 1);
+
     }
 
     $(document).ready(function() {
@@ -330,7 +337,13 @@
         $('#sync-option').on('click', function () {
             syncScoutingFiles();
         });
-
+		
+		$('#MatchNumberRemove').on('click', function () {
+            buttonMinus($('#MatchNumber'));
+        });
+        $('#MatchNumberAdd').on('click', function () {
+            buttonPlusMatch($('#MatchNumber'));
+        });
         $('#CargoButtonRemove3').on('click', function () {
             buttonMinus($('#CargoShip'));
         });
@@ -474,11 +487,21 @@
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
-                      <i class="material-icons">looks_one</i>
+                      
                     </span>
                   </div>
-				  <div class="col-lg-3 col-sm-4" style="width:100px, height:100px" >
-                  <input id="match-number" type="number" class="form-control" placeholder="Match Number" min="1" max="130">
+				  <div class="col-lg-12">
+				  <i class="material-icons">looks_one</i>
+				  <div> Match Number
+				  <div class="col-lg-12" style="width:100px, height:100px">
+			<button id="MatchNumberRemove" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+			<input id="MatchNumber" type="text" value="0" min="0" max="8">
+			<button id="MatchNumberAdd" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+    </div>
                 </div>
               </div>
 			  </div>

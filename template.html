@@ -329,7 +329,12 @@
             syncScoutingFiles();
         });
 
-        
+        $('#CargoButtonRemove3').on('click', function () {
+            buttonMinus($('#CargoShip'));
+        });
+        $('#CargoButtonAdd3').on('click', function () {
+            buttonPlus($('#CargoShip'));
+        });
         $('#CargoButtonRemove').on('click', function () {
             buttonMinus($('#CargoRocketLow'));
         });
@@ -348,7 +353,13 @@
         $('#CargoButtonAdd2').on('click', function () {
             buttonPlus($('#CargoRocketHigh'));
         });
-
+		
+		$('#CargoButtonRemove4').on('click', function () {
+            buttonMinus($('#HatchPanelShip'));
+        });
+        $('#CargoButtonAdd4').on('click', function () {
+            buttonPlus($('#HatchPanelShip'));
+        });
         $('#HatchPanelButtonRemove').on('click', function () {
             buttonMinus($('#HatchPanelRocketLow'));
         });
@@ -591,10 +602,15 @@
 	<div class="main main-unraised">
         <h2><a id="Cargo">Cargo</a></h2>
 		<div> Cargo Ship
-		<div class="slidecontainer">
-			<input type="range" min="0" max="10" value="0" class="slider" id="myRange" oninput="displayCargoType();" onload="displayCargoType();">
-			<p>Value: <span id="demo"></span></p>
-	    </div>
+		<div class="col-md-12 ml-auto">
+		<button id="CargoButtonRemove3" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+        <input id="CargoShip" type="text" value="0" min="0" max="8">
+		<button id="CargoButtonAdd3" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+    </div>
 	    </div>
 
 	<div> Rocket Low-Mid-High
@@ -636,10 +652,15 @@
 	<div class="main main-unraised">
         <h2><a id="HatchPanels">Hatch Panels</a></h2>
 		<div> Cargo Ship
-		<div class="slidecontainer">
-			<input type="range" min="0" max="10" value="0" class="slider" id="biRange" oninput="displayHatchPanelType();" onload="displayHatchPanelType();">
-			<p>Value: <span id="bemo"></span></p>
-	</div>
+		<div class="col-md-12 ml-auto">
+		<button id="CargoButtonRemove4" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+	    </button>
+        <input id="HatchPanelShip" type="text" value="0" min="0" max="8">
+		<button id="CargoButtonAdd4" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+		</button>
+    </div>
         </div>
 	<div> Rocket Low-Mid-High
 	<div class="col-md-12 ml-auto"> Low Rocket

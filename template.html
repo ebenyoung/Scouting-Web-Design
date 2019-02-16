@@ -67,6 +67,20 @@
 
             $('#scouter').attr('value',scoutingInfo.scouter);
 
+            if ( scoutingInfo.position == '1' ) {
+		        document.getElementById('RobotInline').checked = true;
+            } else if ( scoutingInfo.position == '2' ) {
+                document.getElementById('RobotInline1').checked = true;
+            } else if (scoutingInfo.position == '3' ) {
+                document.getElementById('RobotInline2').checked = true;
+            }
+
+            if ( scoutingInfo.alliance == 'Red' ) {
+		        document.getElementById('AllianceInline').checked = true;
+            } else if ( scoutingInfo.alliance == 'Blue' ) {
+                document.getElementById('AllianceInline1').checked = true;
+            }
+
         } catch(err) {
             console.log( 'No stored settings setting up defaults' );
 
@@ -99,14 +113,17 @@
         scoutingData.Setup.Match = document.getElementById('match-number').value;
         if ( scoutingData.Setup.Match == '' ) {
             alert( 'Please Enter The Match Number' );
+            return;
         }
 		
+        scoutingData.Setup.Alliance = '';
 		if ( document.getElementById('AllianceInline').checked ) {
             scoutingData.Setup.Alliance = 'Red';
         } else if ( document.getElementById('AllianceInline1').checked ) {
             scoutingData.Setup.Alliance = 'Blue';
-		}
+		} 
 		
+        scoutingData.Setup.Position = '';
 		if ( document.getElementById('RobotInline').checked ) {
             scoutingData.Setup.Position = '1';
         } else if ( document.getElementById('RobotInline1').checked ) {
@@ -114,6 +131,7 @@
         } else if ( document.getElementById('RobotInline2').checked ) {
             scoutingData.Setup.Position = '3';
         }
+            
         scoutingData.Setup.Team = document.getElementById('teamnumber').value;
 
         scoutingData.Sandstorm = {};
@@ -138,31 +156,57 @@
         }
 
         scoutingData.Cargo = {};
-        scoutingData.Cargo.Cargo_Ship = '42';
-        scoutingData.Cargo.Low = '0';
-        scoutingData.Cargo.Med = '0';
-        scoutingData.Cargo.High = '0';
+        scoutingData.Cargo.Cargo_Ship = $('#myRange').val();
+        scoutingData.Cargo.Low = $('#CargoRocketLow').val();
+        scoutingData.Cargo.Med = $('#CargoRocketMid').val();
+        scoutingData.Cargo.High = $('#CargoRocketHigh').val();
 
         scoutingData.Hatch_Panels = {};
-        scoutingData.Hatch_Panels.Cargo_Ship = '42';
-        scoutingData.Hatch_Panels.Low = '0';
-        scoutingData.Hatch_Panels.Med = '0';
-        scoutingData.Hatch_Panels.High = '0';
+        scoutingData.Hatch_Panels.Cargo_Ship = $('#biRange').val();
+        scoutingData.Hatch_Panels.Low = $('#HatchPanelRocketLow').val();
+        scoutingData.Hatch_Panels.Med = $('#HatchPanelRocketMid').val();
+        scoutingData.Hatch_Panels.High = $('#HatchPanelRocketHigh').val();
 
         scoutingData.End_Game = {};
-        scoutingData.End_Game.Level_1 = '1';
+        scoutingData.End_Game.Level_1 = '0';
+        if ( document.getElementById('EndGameLevel').checked ) {
+            scoutingData.End_Game.Level_1 = '1';
+        }
         scoutingData.End_Game.Level_2 = '0';
+        if ( document.getElementById('EndGameLevel1').checked ) {
+            scoutingData.End_Game.Level_2 = '1';
+        }
         scoutingData.End_Game.Level_3 = '0';
+        if ( document.getElementById('EndGameLevel2').checked ) {
+            scoutingData.End_Game.Level_3 = '1';
+        }
         scoutingData.End_Game.Level_2_Buddy_Climb = '0';
+        if ( document.getElementById('BuddyClimbEnd').checked ) {
+            scoutingData.End_Game.Level_2_Buddy_Climb = '1';
+        }
         scoutingData.End_Game.Level_3_Buddy_Climb = '0';
+        if ( document.getElementById('BuddyClimbEnd1').checked ) {
+            scoutingData.End_Game.Level_3_Buddy_Climb = '1';
+        }
+
         scoutingData.End_Game.Foul = '0';
         scoutingData.End_Game.Tech_Foul = '0';
 
         scoutingData.Match_Results = {};
-        scoutingData.Match_Results.Win = '1';
+        scoutingData.Match_Results.Win = '0';
+        if ( document.getElementById('MatchResultEnd1').checked ) {
+            scoutingData.Match_Results.Win = '1';
+        }
         scoutingData.Match_Results.Tie = '0';
+        if ( document.getElementById('MatchResultEnd').checked ) {
+            scoutingData.Match_Results.Tie = '1';
+        }
         scoutingData.Match_Results.Loss = '0';
-        scoutingData.Match_Results.RP_Earned = '2';
+        if ( document.getElementById('MatchResultEnd2').checked ) {
+            scoutingData.Match_Results.Loss = '1';
+        }
+
+        scoutingData.Match_Results.RP_Earned = '0';
 
         //
         // Update the scouting session information with the 
@@ -194,8 +238,14 @@
                     },
                     success: function () {
                         console.log( 'Scouting Data Saved To: ' + filepath );
+                        location.reload();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        location.reload();
                     }
-                });
+        });
     }
 
     //

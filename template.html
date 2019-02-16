@@ -305,6 +305,8 @@
     function buttonPlus(elem) {
         var value = parseInt(elem.val());
         elem.val(value + 1);
+		if (value > 7 )
+			elem.val(value - 1);
     }
 
     $(document).ready(function() {

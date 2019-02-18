@@ -7,16 +7,10 @@
 	function displayCargoType(){
 		var slider = document.getElementById("myRange");
 		var output = document.getElementById("demo");
-		console.log(slider.value);
-		output.innerHTML = slider.value; // Display the default slider value
-		// Update the current slider value (each time you drag the slider handle)
 	}
 	function displayHatchPanelType(){
 		var slider = document.getElementById("biRange");
 		var output = document.getElementById("bemo");
-		console.log(slider.value);
-		output.innerHTML = slider.value; // Display the default slider value
-		// Update the current slider value (each time you drag the slider handle)
 	}
 
 	</script>
@@ -41,6 +35,60 @@
 </head>
 
 <body>
+    <div class="modal fade" id='editSettingsModal' >
+        <div class="modal-dialog" style= 'width:600px'>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Edit Settings</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id='edit_warning'></div>
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="season-selection">Season</label>
+                                <div class="input-group" id="season-input">
+                                    <input type="text" class="form-control" placeholder="Season..." id="season-selection">
+                                    <div id="season-selections" class="input-group-btn">
+                                        <button id="season-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="season-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="competition-selection">Competition</label>
+                                <div class="input-group" id="competition-input">
+                                    <input type="text" class="form-control" placeholder="Competition..." id="competition-selection">
+                                    <div id="competition-selections" class="input-group-btn">
+                                        <button id="competition-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="competition-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="enable-debug">
+                                <input type="checkbox" class="form-check-input" id="enable-debug" name="enable-debug" value="option19">Enable Debug Logging
+                                <span class="form-check-sign"><span class="check"></span></span>
+                            </label>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+	                <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-primary btn-round" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-round" id='submit-edit-settings' onClick='submitEditSettings()'>Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="header">
   <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
@@ -52,6 +100,68 @@
     // global scouting info object, used to store scouting session related
     // data between matches
     var scoutingInfo = {};
+
+    var settings = {};
+    var seasonSelections = new Object();
+    var competitionSelections = new Object();
+
+    function loadSeasons(seasonElem) {
+        // load the set of seasons into this page
+        seasonSelections = [ '2019' ];
+        for ( var i=0; i<seasonSelections.length; i++ ) {
+            $('#' + seasonElem + ' ul').append('<li><a href="#" id="setEditSeason' + seasonSelections[i] + '">' + seasonSelections[i] + '</a></li>');
+        }
+    }
+    function setSeason( seasonName ) {
+        var seasonLabel = document.getElementById('season-selection');
+        seasonLabel.value = seasonName;
+    }
+
+    function loadCompetitions(competitionElem) {
+        // load the set of competitions into this page
+        competitionSelections = [ 'WEEK0', 'NHGRS', 'MAREA', 'NHDUR', 'NHSNH', 'NECMP' ];
+        for ( var i=0; i<competitionSelections.length; i++ ) {
+            $('#' + competitionElem + ' ul').append('<li><a href="#" id="setEditCompetition' + competitionSelections[i] + '">' + competitionSelections[i] + '</a></li>');
+        }
+    }
+    function setCompetition( competitionName ) {
+        var competitionLabel = document.getElementById('competition-selection');
+        competitionLabel.value = competitionName;
+    }
+
+    function editSettings() {
+        $('#season-selection').attr('value',settings.season.name);
+        $("#season-input").removeClass("is-empty");
+        $('#competition-selection').attr('value',settings.competition.code);
+        $("#competition-input").removeClass("is-empty");
+        $("#enable-debug").prop('checked', settings.debug);
+
+        $('#editSettingsModal').modal('toggle');
+    }
+    function submitEditSettings() {
+        settings.season.name = document.getElementById('season-selection').value;
+        settings.competition.code = document.getElementById('competition-selection').value;
+        settings.debug = document.getElementById('enable-debug').checked;
+        localStorage.settings = JSON.stringify( settings );
+        location.reload();
+    }
+    function loadSettings() {
+        // load the stored settings from the browser storage to remember any
+        // settings that the user may have set the last time.
+        try {
+            settings = JSON.parse( localStorage.settings );
+            if ( settings.season == null )
+                settings.season = { name: '2019' };
+            if ( settings.competition == null )
+                settings.competition = {code: 'Default', name: 'Default Event' };
+        } catch(err) {
+            console.log( 'No stored settings setting up defaults' );
+
+            settings.season = {name: '2019' };
+            settings.competition = {code: 'Default', name: 'Default Event' };
+            localStorage.settings = JSON.stringify( settings );
+        }
+    }
 
     //
     // Function will load the scouting session info from the browser storage
@@ -110,7 +220,7 @@
         //
         scoutingData.Setup = {};
         scoutingData.Setup.Scouter = document.getElementById('scouter').value;
-        scoutingData.Setup.Match = document.getElementById('match-number').value;
+        scoutingData.Setup.Match = document.getElementById('MatchNumber').value;
         if ( scoutingData.Setup.Match == '' ) {
             alert( 'Please Enter The Match Number' );
             return;
@@ -222,15 +332,19 @@
         //
         // Some of this information will be stored in the browser storage as 
         // configuration settings. - need to complete this part.
-        var season = '2019';
-        var eventCode = 'Week0';
+        var season = settings.season.name;
+        var eventCode = settings.competition.code;
         var fileName = 'Match' + scoutingData.Setup.Match + '_' + 
                         scoutingData.Setup.Alliance + scoutingData.Setup.Position;
         var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
 
-        //    url: 'http://localhost:8080/sync' + filePath + '?sync=true&debug=true',
+        var paramStr = '?sync=true';
+        if ( settings.debug ) {
+            paramStr += '&debug=true';
+        }
+
         $.ajax({
-            url: 'http://localhost:8080/sync' + filePath + '',
+            url: 'http://localhost:8080/sync' + filePath + paramStr,
                     type: 'PUT',
                     data: JSON.stringify(scoutingData),
                     crossDomain: true,
@@ -256,7 +370,7 @@
     // Some of the parameters are currently hardcoded, but will be 
     // set through configuration
     //
-    function updateScoutingApp(recurse_param) {
+    function updateScoutingApp(paramStr) {
         var updateCntrl = {};
         updateCntrl.sync_method = 'HTTP';
         updateCntrl.sync_control = 'Download_Updates';
@@ -265,7 +379,15 @@
         updateCntrl.server_port = '8080';
         updateCntrlJson = JSON.stringify(updateCntrl);
 
-        $.post( 'http://localhost:8080/sync'+recurse_param, updateCntrlJson )
+        if ( settings.debug ) {
+            if ( paramStr.length > 0 ) {
+                paramStr += '&debug=true';
+            } else {
+                paramStr = '?debug=true';
+            }
+        }
+
+        $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
                 .done(function( data ) {
                     setTimeout(function(){ location.reload; }, 5000);
                 });
@@ -285,13 +407,21 @@
     // set through configuration
     //
     function syncScoutingFiles() {
+        var season = settings.season.name;
+        var eventCode = settings.competition.code;
+
         var updateCntrl = {};
         updateCntrl.sync_method = 'Bluetooth';
         updateCntrl.sync_control = 'Upload_Only';
-        updateCntrl.paths = [ 'static/data/Week02019/ScoutingData/' ];
+        updateCntrl.paths = [ 'static/data/'+ eventCode + season + '/ScoutingData/' ];
         updateCntrlJson = JSON.stringify(updateCntrl);
 
-        $.post( 'http://localhost:8080/sync', updateCntrlJson )
+        if ( settings.debug )
+            paramStr = '?debug=true';
+        else
+            paramStr = '';
+
+        $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
                 .done(function( data ) {
                     setTimeout(function(){ location.reload; }, 5000);
                 });
@@ -318,7 +448,37 @@
 
     $(document).ready(function() {
 
+        loadSettings();
+        loadSeasons('season-selections');
+        loadCompetitions('competition-selections');
+
         loadScoutingSessionInfo();
+
+        $('#season-selections').on('click', '.dropdown-menu li a', function () {
+            setSeason( $(this).text() );
+        });
+        $('#season-selection').on('click', function () {
+            if ( !$('#season-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#season-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
+        $('#competition-selections').on('click', '.dropdown-menu li a', function () {
+            setCompetition( $(this).text() );
+        });
+        $('#competition-selection').on('click', function () {
+            if ( !$('#competition-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#competition-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
+        $('#edit-settings-option').on('click', function () {
+            editSettings();
+        });
 
         $('#save-option').on('click', function () {
             saveScoutingData();
@@ -399,32 +559,42 @@
 </script>
   <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
     <div class="container">
-      <div class="navbar-translate">
+
+      <div class="row navbar-translate">
         <a class="navbar-brand" href="#SandStorm">
 		<img src="images/SandStorm.png" class="icon"></img> SandStorm
-          </a>
+        </a>
 		<a class="navbar-brand" href="#Cargo">
 		<i class="material-icons">scatter_plot</i> Cargo
-          </a>
+        </a>
+        <!--
 		<a class="navbar-brand" href="#HatchPanels">
 		<i class="material-icons">album</i> Hatch Panels
-          </a>
+        </a>
+         -->
 		<a class="navbar-brand" href="#EndGame">
 		<i class="material-icons">flag</i> End Game
           </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
-		
       </div>
-      <div class="collapse navbar-collapse">
+      <div class="row collapse navbar-collapse">
 		<button class="btn btn-primary btn-link">
 		<div class="ripple-container"></div>
 		</button>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav navbar-right">
           <li id="save-option" class="nav-item">
             <a href="#" class="nav-link">
               <i class="material-icons">save</i> Save
+            </a>
+          </li>
+          <li id="edit-settings-option" class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa fa-cog"></i> Settings
             </a>
           </li>
           <li id="update-app-html" class="nav-item">
@@ -444,6 +614,7 @@
           </li>
         </ul>
       </div>
+		
     </div>
   </nav>
   <div class="unspacer"></div>
@@ -818,7 +989,6 @@
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
-	<div>
 
     <div>
         <br>
@@ -841,14 +1011,6 @@
 	}
 		</script>
 	</div>
-
-  <!--
-	<div class="col-md-8 ml-auto">
-		<button id="update-button" class="btn btn-primary btn-round">
-		<i class="material-icons">apps</i> Update Scouting App
-	    </button>
-	</div>
-  -->
 
   <footer class="footer footer-default">
     <div class="container">
@@ -875,6 +1037,7 @@
   displayCargoType();
   displayHatchPanelType();
   </script>
+
 </body>
 
 </html>

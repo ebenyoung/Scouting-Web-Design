@@ -315,6 +315,13 @@
 			elem.val(value - 1);
 
     }
+	function buttonPlusCargoRocket(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 3)
+			elem.val(value - 1);
+	
+	}
 
     $(document).ready(function() {
 
@@ -344,6 +351,9 @@
         $('#MatchNumberAdd').on('click', function () {
             buttonPlusMatch($('#MatchNumber'));
         });
+		$('#save-button').on('click', function () {
+			buttonPlusMatch($('#MatchNumber'));
+		});
         $('#CargoButtonRemove3').on('click', function () {
             buttonMinus($('#CargoShip'));
         });
@@ -354,19 +364,19 @@
             buttonMinus($('#CargoRocketLow'));
         });
         $('#CargoButtonAdd').on('click', function () {
-            buttonPlus($('#CargoRocketLow'));
+            buttonPlusCargoRocket($('#CargoRocketLow'));
         });
         $('#CargoButtonRemove1').on('click', function () {
             buttonMinus($('#CargoRocketMid'));
         });
         $('#CargoButtonAdd1').on('click', function () {
-            buttonPlus($('#CargoRocketMid'));
+            buttonPlusCargoRocket($('#CargoRocketMid'));
         });
         $('#CargoButtonRemove2').on('click', function () {
             buttonMinus($('#CargoRocketHigh'));
         });
         $('#CargoButtonAdd2').on('click', function () {
-            buttonPlus($('#CargoRocketHigh'));
+            buttonPlusCargoRocket($('#CargoRocketHigh'));
         });
 		
 		$('#CargoButtonRemove4').on('click', function () {
@@ -379,19 +389,19 @@
             buttonMinus($('#HatchPanelRocketLow'));
         });
         $('#HatchPanelButtonAdd').on('click', function () {
-            buttonPlus($('#HatchPanelRocketLow'));
+            buttonPlusCargoRocket($('#HatchPanelRocketLow'));
         });
         $('#HatchPanelButtonRemove1').on('click', function () {
             buttonMinus($('#HatchPanelRocketMid'));
         });
         $('#HatchPanelButtonAdd1').on('click', function () {
-            buttonPlus($('#HatchPanelRocketMid'));
+            buttonPlusCargoRocket($('#HatchPanelRocketMid'));
         });
         $('#HatchPanelButtonRemove2').on('click', function () {
             buttonMinus($('#HatchPanelRocketHigh'));
         });
         $('#HatchPanelButtonAdd2').on('click', function () {
-            buttonPlus($('#HatchPanelRocketHigh'));
+            buttonPlusCargoRocket($('#HatchPanelRocketHigh'));
         });
 
     });
@@ -489,19 +499,24 @@
                       
                     </span>
                   </div>
-				  <div class="col-lg-12">
-				  <i class="material-icons">looks_one</i>
-				  <div> Match Number
+				<div class="col-lg-12">
+				<div class="popup" onclick="MatchNumberInfo()">Match Number
+					<span class="popuptext" id="myPopup2">When you Save, this will Auto Increase</span>
+				<div class="col-lg-12">
+				<i class="material-icons">looks_one</i>
+				</div>
+				</div>
+			
 				  <div class="col-lg-12" style="width:100px, height:100px">
 			<button id="MatchNumberRemove" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 	    </button>
-			<input id="MatchNumber" type="text" value="0" min="0" max="8">
+			<input id="MatchNumber" type="text" value="0" min="0" max="130">
 			<button id="MatchNumberAdd" class="btn btn-primary btn-round">
 			<i class="material-icons">add</i>
 		</button>
     </div>
-                </div>
+              </div>
               </div>
 			  </div>
 	<div> Competition Round
@@ -546,7 +561,15 @@
 		</label>
     </div>
     </div>
-	<div> Robot Position
+		<div> Alliance Position
+			<div class="popup" onclick="TeamPositionInfo()">
+			<span class="popuptext" id="myPopup"></span>
+			<div class="col-md-7 ml-auto">
+			<img src="images/InfoBox.png" class="icon"></img>
+		
+	</div>
+	</div>
+	</div>
 	<div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotInline">
@@ -588,7 +611,7 @@
     </div>
 	<div class="main main-unraised">
         <h2><a id="SandStorm">SandStorm</a></h2>
-	<div> Starting Level
+	<div> Starting Level: Hab Platform
 	<div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="SandStormInline">
@@ -608,7 +631,7 @@
 			<span class="circle"><span class="check"></span></span>
 		</label>
 	</div>
-	<div> Did the robot cross the Habline?
+	<div> Did the robot cross the Hab-line?
 	<div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="materialInline4">
@@ -630,7 +653,7 @@
 		<button id="CargoButtonRemove3" class="btn btn-primary btn-round">
 			<i class="material-icons">remove</i>
 	    </button>
-        <input id="CargoShip" type="text" value="0" min="0" max="8">
+        <input id="CargoShip" type="text" value="0" min="0" max="4">
 		<button id="CargoButtonAdd3" class="btn btn-primary btn-round">
 			<i class="material-icons">add</i>
 		</button>
@@ -824,13 +847,14 @@
         <br>
 	<div>
 
+	<div class="form-check form-check-inline">
 	<div class="col-md-12 ml-auto">
 		<button id="save-button" class="btn btn-primary btn-round">
 		<i class="material-icons">save</i> Save
 	    </button>
 	</div>
 	
-	<div class="col-lg-12">
+	<div class="form-check form-check-inline">
 		<button id="ClearButton" onclick="resetFunction()" class="btn btn-primary btn-round">
 		<i class="material-icons">cached</i> Clear
 	    </button>
@@ -841,8 +865,21 @@
 		location.reload(true);
 	}
 	}
+	
 		</script>
 	</div>
+		<script>
+		// When the user clicks on <div>, open the popup
+		function TeamPositionInfo() {
+		var popup = document.getElementById("myPopup");
+		popup.classList.toggle("show");
+	}
+		// When the user clicks on <div>, open the popup
+		function MatchNumberInfo() {
+		var popup = document.getElementById("myPopup2");
+		popup.classList.toggle("show");
+	}
+</script>
 
   <!--
 	<div class="col-md-8 ml-auto">

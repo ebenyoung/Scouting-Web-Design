@@ -475,6 +475,19 @@
 			elem.val(value - 1);
 	
 	}
+	function buttonPlusFoul(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 3)
+			elem.val(value - 1);
+	
+	}
+	function buttonPlusFoul1(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 3)
+			elem.val(value - 1);
+	}
 
     $(document).ready(function() {
 
@@ -586,6 +599,18 @@
         $('#HatchPanelButtonAdd2').on('click', function () {
             buttonPlusCargoRocket($('#HatchPanelRocketHigh'));
         });
+		$('#FoulButtonRemove').on('click', function () {
+            buttonMinus($('#Foul'));
+		});
+		$('#FoulButtonAdd').on('click', function () {
+            buttonPlusFoul($('#Foul'));
+		});
+		$('#FoulButtonRemove1').on('click', function () {
+            buttonMinus($('#TechFoul'));
+		});
+		$('#FoulButtonAdd1').on('click', function () {
+            buttonPlusFoul1($('#TechFoul'));
+		});
 
     });
 
@@ -984,26 +1009,29 @@
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
-	<div class="form-group bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">assignment_late</i>
-                    </span>
-                  </div>
-                  <input type="text" id="FoulInfo" class="form-control" placeholder="Foul Info">
-                </div>
-              </div>
-	<div class="form-group bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">report_problem</i>
-                    </span>
-                  </div>
-                  <input type="text" id="TechFoulInfo" class="form-control" placeholder="Tech Foul Info">
-                </div>
-              </div>
+	<div>
+	<div> Foul
+		<div class="col-lg-14">
+		<button id="FoulButtonRemove" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+        <input id="Foul" type="text" value="0" min="0" max="4">
+		<button id="FoulButtonAdd" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+	</button>
+    </div>
+	</div>
+	<div> Tech Foul
+		<div class="col-lg-14">
+		<button id="FoulButtonRemove1" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+        <input id="TechFoul" type="text" value="0" min="0" max="4">
+		<button id="FoulButtonAdd1" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+	</button>
+    </div>
+	</div>
 	<div class="form-group bmd-form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">

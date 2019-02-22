@@ -488,6 +488,12 @@
 		if (value > 3)
 			elem.val(value - 1);
 	}
+	function buttonPlusSMatch(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 129)
+			elem.val(value - 1);
+	}
 
     $(document).ready(function() {
 
@@ -548,7 +554,7 @@
             buttonPlusMatch($('#MatchNumber'));
         });
 		$('#save-button').on('click', function () {
-			buttonPlusMatch($('#MatchNumber'));
+			buttonPlusSMatch($('#MatchNumber'));
 		});
         $('#CargoButtonRemove3').on('click', function () {
             buttonMinus($('#CargoShip'));
@@ -726,15 +732,15 @@
 				</div>
 				</div>
 			
-				  <div class="col-lg-12" style="width:100px, height:100px">
-			<button id="MatchNumberRemove" class="btn btn-primary btn-round">
-			<i class="material-icons">remove</i>
+				<div class="col-lg-12" style="width:100px, height:100px">
+					<button id="MatchNumberRemove" class="btn btn-primary btn-round">
+					<i class="material-icons">remove</i>
 	    </button>
 			<input id="MatchNumber" type="text" value="0" min="0" max="130">
 			<button id="MatchNumberAdd" class="btn btn-primary btn-round">
 			<i class="material-icons">add</i>
 		</button>
-    </div>
+			  </div>
               </div>
               </div>
 			  </div>

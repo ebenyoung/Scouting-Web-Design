@@ -494,6 +494,12 @@
 		if (value > 129)
 			elem.val(value - 1);
 	}
+	function buttonPlusRP(elem) {
+		var value = parseInt(elem.val());
+		elem.val(value + 1);
+		if (value > 3)
+			elem.val(value - 1);
+	}
 
     $(document).ready(function() {
 
@@ -617,6 +623,12 @@
 		$('#FoulButtonAdd1').on('click', function () {
             buttonPlusFoul1($('#TechFoul'));
 		});
+		$('#RPButtonRemove').on('click', function () {
+            buttonMinus($('#RP'));
+		});
+		$('#RPButtonAdd').on('click', function () {
+            buttonPlusRP($('#RP'));
+		});
 
     });
 
@@ -687,7 +699,7 @@
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
           <div class="brand text-center">
-            <h1>Welcome to the Scouting Web</h1>
+            <h1><a id="Top">Welcome to the Scouting Web</a></h1>
           </div>
         </div>
       </div>
@@ -834,19 +846,19 @@
 	<div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotInline">
-			<input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">1 L
+			<input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">3
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotInline1">
-			<input type="radio" class="form-check-input" id="RobotInline1" name="RoboPosition" value="option8">2 M
+			<input type="radio" class="form-check-input" id="RobotInline1" name="RoboPosition" value="option8">2
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotInline2">
-			<input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">3 R
+			<input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">1
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -1105,6 +1117,20 @@
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
+	<div>
+	<div> RP earned
+	<div class="col-lg-14">
+	<i class="material-icons">grade</i>
+	<div class="col-lg-14">
+		<button id="RPButtonRemove" class="btn btn-primary btn-round">
+			<i class="material-icons">remove</i>
+		</button>
+        <input id="RP" type="text" value="0" min="0" max="3">
+		<button id="RPButtonAdd" class="btn btn-primary btn-round">
+			<i class="material-icons">add</i>
+	</button>
+    </div>
+	</div>
 
     <div>
         <br>
@@ -1137,7 +1163,7 @@
 	
 	<div class="form-check form-check-inline">
 	<div class="col-md-12 ml-auto">
-		<button id="TopButton" class="btn btn-primary btn-link" href="#myBar">
+		<button id="TopButton" onclick="topFunction()" class="btn btn-primary btn-link">
 		<i class="material-icons">change_history</i>
 	    </button>
 	</div>
@@ -1158,6 +1184,10 @@
 		$(document).ready(function() {
 		$('.image-link').magnificPopup({type:'image'});
 	});
+		function topFunction() {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
+	}
 </script>
 
   <footer class="footer footer-default">

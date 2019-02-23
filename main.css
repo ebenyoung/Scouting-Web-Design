@@ -19,49 +19,6 @@ nav {
 	display: inline;
 }
 
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
-}
-
-/* The slider itself */
-.slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
-  width: 50%; /* Full-width */
-  height: 20px; /* Specified height */
-  border-radius: 5px;
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-  transition: opacity .2s;
-}
-
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
-}
-
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px;
-  border: 0;
-  border-radius: 50%;
-  background: #4E2490;
-/* Slider handle height */
-/* background: url('scatter_plot.png'); /* Green background */
-  cursor: pointer; /* Cursor on hover */
-}
-
-.slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 15px; /* Slider handle height */
-  border: 0;
-  background: #4E2490; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-}
 </style>
 </head>
 <body>
@@ -157,7 +114,7 @@ nav {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  display: fixed; /* Hidden by default */
   position: relative; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 10px; /* Location of the box */
@@ -174,7 +131,7 @@ nav {
 .modal-content {
   margin: auto;
   display: block;
-  width: 80%;
+  width: 50%;
   max-width: 700px;
 }
 
@@ -203,10 +160,10 @@ nav {
 
 /* The Close Button */
 .close {
-  position: absolute;
+  position: relative;
   top: 15px;
-  right: 35px;
-  color: #f1f1f1;
+  right: 20px;
+  color: #008080;
   font-size: 40px;
   font-weight: bold;
   transition: 0.3s;

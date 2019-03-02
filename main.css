@@ -18,8 +18,8 @@ nav {
 {
 	display: inline;
 }
-/* Navbar links */
-#navbar a {
+
+/*#navbar a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -28,7 +28,7 @@ nav {
   text-decoration: none;
 }
 /* Page content */
-.content {
+/*.content {
   padding: 16px;
 }
 .sticky {

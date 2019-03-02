@@ -488,7 +488,7 @@
 		if (value > 3)
 			elem.val(value - 1);
 	}
-	function buttonPlusSMatch(elem) {
+	function buttonPlusSpecial(elem) {
 		var value = parseInt(elem.val());
 		elem.val(value + 1);
 		if (value > 129)
@@ -560,7 +560,7 @@
             buttonPlusMatch($('#MatchNumber'));
         });
 		$('#save-button').on('click', function () {
-			buttonPlusSMatch($('#MatchNumber'));
+			buttonPlusSpecial($('#MatchNumber'));
 		});
         $('#CargoButtonRemove3').on('click', function () {
             buttonMinus($('#CargoShip'));
@@ -634,7 +634,7 @@
 
 </script>
   <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
-    <div class="container">
+    <div id="navbar" class="container">
 
       <div class="row navbar-translate">
         <a class="navbar-brand" href="#SandStorm">
@@ -806,9 +806,6 @@
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
 
-		<!-- The Close Button -->
-		<span class="close">&times;</span>
-
 		<!-- Modal Content (The Image) -->
 		<img class="modal-content" id="img01">
 
@@ -830,14 +827,6 @@
 		modal.style.display = "block";
 		modalImg.src = this.src;
 		captionText.innerHTML = this.alt;
-	}
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() { 
-		modal.style.display = "none";
 	}
 
 	//When the user clicks outside of the window, close the modal
@@ -1139,15 +1128,12 @@
     </div>
 	</div>
 
-    <div>
-        <br>
-	<div>
 
-	<div class="form-check form-check-inline">
-	<div class="col-md-12 ml-auto">
-		<button id="save-button" onclick="buttonPlusSMatch()" class="btn btn-primary btn-round">
-		<i class="material-icons">save</i> Save
-	    </button>
+		<div class="form-check form-check-inline">
+		<div class="col-md-12 ml-auto">
+			<button id="save-button" class="btn btn-primary btn-round">
+			<i class="material-icons">save</i> Save
+	</button>
 	</div>
 	</div>
 	
@@ -1195,6 +1181,25 @@
 			document.body.scrollTop = 0;
 			document.documentElement.scrollTop = 0;
 	}
+</script>
+<script>
+	// When the user scrolls the page, execute myFunction 
+	window.onscroll = function() {StickyNav()};
+
+	// Get the navbar
+	var navbar = document.getElementById("navbar");
+
+	// Get the offset position of the navbar
+	var sticky = navbar.offsetTop;
+
+	// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+	function StickyNav() {
+		if (window.pageYOffset >= sticky) {
+		navbar.classList.add("sticky")
+	} else {
+		navbar.classList.remove("sticky");
+  }
+}
 </script>
 
   <footer class="footer footer-default">

@@ -23,6 +23,172 @@
 
 </head>
 
+<script>
+
+    var settings = {};
+
+    function loadSettings() {
+        // load the stored settings from the browser storage to remember any
+        // settings that the user may have set the last time.
+        try {
+            settings = JSON.parse( localStorage.settings );
+            if ( settings.season == null )
+                settings.season = { name: '2019' };
+            if ( settings.competition == null )
+                settings.competition = {code: 'Default', name: 'Default Event' };
+            if ( settings.server == null )
+                settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+        } catch(err) {
+            console.log( 'No stored settings setting up defaults' );
+
+            settings.season = {name: '2019' };
+            settings.competition = {code: 'Default', name: 'Default Event' };
+            settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+            localStorage.settings = JSON.stringify( settings );
+        }
+    }
+
+    //
+    // Function will load the scouting session info from the browser storage
+    // and preload the scouting sheet with that information
+    //
+    function loadScoutingSessionInfo() {
+        // load the stored settings from the browser storage to remember any
+        // settings that the user may have set the last time.
+        try {
+            scoutingInfo = JSON.parse( localStorage.scoutingInfo );
+            if ( scoutingInfo.scouter == null )
+                scoutingInfo.scouter = '';
+            
+            $('#scouter').attr('value',scoutingInfo.scouter);
+        } catch(err) {
+            console.log( 'No stored settings setting up defaults' );
+
+            scoutingInfo.scouter = '';
+            localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
+        }
+        return scoutingInfo;
+    }
+
+    function saveScoutingData() {
+        var scoutingData = {};
+
+        // We will require a scouter name and team number, so check that 
+        // those fields have been filled in.
+        scoutingData.Pit = {};
+        scoutingData.Pit.Scouter = document.getElementById('scouter').value;
+        if ( scoutingData.Pit.Scouter == '' ) {
+            alert( 'Please Enter The Scouter Name' );
+            return;
+        }
+        scoutingData.Pit.Team = document.getElementById('teamnumber').value;
+        if ( scoutingData.Pit.Team == '' ) {
+            alert( 'Please Enter The Team Number' );
+            return;
+        }
+
+        // /////////////////////////////////////////////////////////////////// //
+        //
+        // Extract the rest of the saving of the pit scouting sheet data here
+
+        // scoutingData.Pit.XXX = document.getElementById('yyy').value;
+
+
+        // /////////////////////////////////////////////////////////////////// //
+
+        //
+        // Update the scouting session information with the
+        // current settings and store to the browser's
+        // local storage.
+        //
+        scoutingInfo.scouter = scoutingData.Setup.Scouter;
+        localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
+
+        var season = settings.season.name;
+        var eventCode = settings.competition.code;
+        var fileName = 'Team' + scoutingData.Pit.Team + '_Pit_' + scoutingData.Pit.Scouter;
+        var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
+
+        var paramStr = '?sync=false';
+        if ( settings.debug ) {
+            paramStr += '&debug=true';
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/sync' + filePath + paramStr,
+                    type: 'PUT',
+                    data: JSON.stringify(scoutingData),
+                    crossDomain: true,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader( 'Content-Type', 'application/json' );
+                    },
+                    success: function () {
+                        console.log( 'Pit Scouting Data Saved To: ' + filepath );
+                        location.reload();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                        location.reload();
+                    }
+        });
+    }
+
+    function takePicture() {
+
+        var scouter = document.getElementById('scouter').value;
+        if ( scouter == '' ) {
+            alert( 'Please Enter The Scouter Name' );
+            return;
+        }
+        var teamNumber = document.getElementById('teamnumber').value;
+        if ( teamNumber == '' ) {
+            alert( 'Please Enter The Team Number' );
+            return;
+        }
+
+        var season = settings.season.name;
+        var eventCode = settings.competition.code;
+        var path = eventCode + season + '/' + teamNumber;
+
+        var paramStr = '?id=' + scouter.replace(/\s+/g, '');
+        if ( settings.debug ) {
+            paramStr += '&debug=true';
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/picture/' + path + paramStr,
+                    type: 'POST',
+                    crossDomain: true,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader( 'Content-Type', 'application/json' );
+                    },
+                    success: function () {
+                        console.log( 'Request to take picture accepted' );
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                    }
+        });
+
+    }
+
+    $(document).ready(function() {
+
+        loadSettings();
+        loadScoutingSessionInfo();
+
+        $('#save-button').on('click', function () {
+            saveScoutingData();
+        });
+
+    });
+
+
+</script>
+
+
 <div class="header">
   <div class="progress-container">
     <div class="progress-bar" id="myBar"></div>
@@ -553,7 +719,7 @@
 	</div>
 	<div class="form-check form-check-inline">
 	<div class="col-md-12 ml-auto">
-		<button id="Camera" onclick="cameraFunction()" class="btn btn-sm btn-primary btn-round">
+		<button id="Camera" onclick="takePicture()" class="btn btn-sm btn-primary btn-round">
 		<img src="images/camera_enchance.png" class="icon"></img>
 	    </button>
 	</div>

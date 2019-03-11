@@ -86,6 +86,65 @@
             alert( 'Please Enter The Team Number' );
             return;
         }
+		
+		scoutingData.Pit.DriveTrain = document.getElementById('drivetrain').value;
+		
+		scoutingData.DriveTeam = '';
+		if ( document.getElementById('DT').checked ) {
+            scoutingData.DriveTeam = 'Veteran';
+        } else if ( document.getElementById('DT1').checked ) {
+            scoutingData.DriveTeam = 'Rookie';
+        } else if ( document.getElementById('DT2').checked ) {
+            scoutingData.DriveTeam = 'Mixed';
+        }
+		
+		scoutingData.PicturesC = '';
+		if ( document.getElementById('PictureC').checked ) {
+            scoutingData.PicturesC = 'Yes';
+        } else if ( document.getElementById('PictureC1').checked ) {
+            scoutingData.PicturesC = 'No';
+        }
+		
+		scoutingData.PicturesD = '';
+		if ( document.getElementById('PictureD').checked ) {
+            scoutingData.PicturesD = 'Yes';
+        } else if ( document.getElementById('PictureD1').checked ) {
+            scoutingData.PicturesD = 'No';
+        }
+		
+		scoutingData.PicturesCb = '';
+		if ( document.getElementById('PictureCb').checked ) {
+            scoutingData.PicturesCb = 'Yes';
+        } else if ( document.getElementById('PictureCb1').checked ) {
+            scoutingData.PicturesCb = 'No';
+        }
+		
+		scoutingData.Robothings = '';
+		if ( document.getElementById('RobotPos').checked ) {
+            scoutingData.Robothings = 'Low';
+        } else if ( document.getElementById('RobotPos1').checked ) {
+            scoutingData.Robothings = 'Mid';
+        } else if ( document.getElementById('RobotPos2').checked ) {
+            scoutingData.Robothings = 'High';
+        }
+		
+		scoutingData.RoboPre = '';
+		if ( document.getElementById('RobotPre').checked ) {
+            scoutingData.RoboPre = 'Cargo';
+        } else if ( document.getElementById('RobotPre1').checked ) {
+            scoutingData.RoboPre = 'Hatch Panel';
+        }
+		
+		scoutingData.AVS = '';
+		if ( document.getElementById('AV').checked ) {
+            scoutingData.AVS = 'Auto';
+        } else if ( document.getElementById('AV1').checked ) {
+            scoutingData.AVS = 'Vision';
+        }
+		
+		scoutingData.Pit.What = document.getElementById('what').value;
+		
+		
 
         // /////////////////////////////////////////////////////////////////// //
         //

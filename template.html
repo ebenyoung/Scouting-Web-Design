@@ -72,7 +72,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="server-ipaddress">Server IP Address</label>
-                                <div class="input-group" id="competition-input">
+                                <div class="input-group" id="server-ipaddress-input">
                                     <input type="text" class="form-control" placeholder="Server IpAddress..." id="server-ipaddress">
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <label for="server-port">Server Port</label>
-                                <div class="input-group" id="competition-input">
+                                <div class="input-group" id="server-port-input">
                                     <input type="text" class="form-control" placeholder="Server Port(8080)..." id="server-port">
                                 </div>
                             </div>
@@ -634,7 +634,7 @@
 
 </script>
   <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
-    <div id="navbar" class="container">
+    <div id=appNavbar class="container">
 
       <div class="row navbar-translate">
         <a class="navbar-brand" href="#SandStorm">
@@ -643,14 +643,9 @@
 		<a class="navbar-brand" href="#Cargo">
 		<img src="images/scatter_plot.png" class="icon"></img> Cargo
         </a>
-        <!--
-		<a class="navbar-brand" href="#HatchPanels">
-		<i class="material-icons">album</i> Hatch Panels
-        </a>
-         -->
 		<a class="navbar-brand" href="#EndGame">
 		<img src="images/Flag.png" class="icon"></img> End Game
-          </a>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
@@ -705,119 +700,115 @@
       </div>
     </div>
   </div>
+
   <div class="main main-raised">
     <div class="container">
       <div class="section text-center">
         <h2><a id="Set_Up">Set Up</a></h2>
-		<div class="form-group bmd-form-group">
+            <div class="form-group bmd-form-group">
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <img src="images/Accessibility.png" class="icon"></img>
-                    </span>
-                  </div>
-                  <input id=scouter type="text" class="form-control" placeholder="Scouter">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <img src="images/Accessibility.png" class="icon"></img>
+                        </span>
+                    </div>
+                    <input id=scouter type="text" class="form-control" placeholder="Scouter">
                 </div>
-              </div>
-			  <div class="form-group bmd-form-group">
+            </div>
+            <div class="form-group bmd-form-group">
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <img src="images/Group.png" class="icon"></img>
-                    </span>
-                  </div>
-                  <input id=teamnumber type="text" class="form-control" placeholder="Team Number">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <img src="images/Group.png" class="icon"></img>
+                        </span>
+                    </div>
+                    <input id=teamnumber type="text" class="form-control" placeholder="Team Number">
                 </div>
-              </div>
-			  <div class="form-group bmd-form-group">
+            </div>
+            <div class="form-group bmd-form-group">
                 <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      
-                    </span>
-                  </div>
-				<div class="col-lg-12">
-				<div class="popup" onclick="MatchNumberInfo()">Match Number
-					<span class="popuptext" id="myPopup2">When you Save, this will Auto Increase</span>
-				<div class="col-lg-12">
-				<img src="images/Looks_One.png" class="icon"></img>
-				</div>
-				</div>
-			
-				<div class="col-lg-12" style="width:100px, height:100px">
-					<button id="MatchNumberRemove" class="btn btn-sm btn-primary btn-round">
-					<img src="images/remove4.png" class="icon"></img>
-	    </button>
-			<input id="MatchNumber" type="text" value="0" min="0" max="130">
-			<button id="MatchNumberAdd" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-			  </div>
-              </div>
-              </div>
-			  </div>
-	<div> Competition Round
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SetUpInline">
-			<input type="radio" class="form-check-input" id="SetUpInline" name="startinglevel" value="option">Qual
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SetUpInline1">
-			<input type="radio" class="form-check-input" id="SetUpInline1" name="startinglevel" value="option2">Quarter
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SetUpInline2">
-			<input type="radio" class="form-check-input" id="SetUpInline2" name="startinglevel" value="option3">Semi
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SetUpInline3">
-			<input type="radio" class="form-check-input" id="SetUpInline3" name="startinglevel" value="option4">Final
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div>
-	<div> Alliance Side
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="AllianceInline">
-			<input type="radio" class="form-check-input" id="AllianceInline" name="AllianceSide" value="option5">Red
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	  <div class="form-check form-check-inline">
-		<label class="form-check-label" for="AllianceInline1">
-			<input type="radio" class="form-check-input" id="AllianceInline1" name="AllianceSide" value="option6">Blue
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-    </div>
-		<div class="col-lg-12">
-		<div class="popup" onclick="AlliancePositionInfo()"> Alliance Position
-			<span class="popuptext" id="myPopup3">Red side is inverse order</span>
-	</div>
-	</div>
-		<div class="col-md-12 ml-auto">
-		<!-- Trigger the Modal -->
-		<img id="myImg" src="images/HabF.png" alt="Habitat Positions" style="width:10%;max-width:300px">
-
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
-
-		<!-- Modal Content (The Image) -->
-		<img class="modal-content" id="img01">
-
-		<!-- Modal Caption (Image Text) -->
-		<div id="caption"></div>
-	</div>
-	</div>
-	</div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                        </span>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="popup" onclick="MatchNumberInfo()">Match Number
+                            <span class="popuptext" id="myPopup2">When you Save, this will Auto Increase</span>
+                            <div class="col-lg-12">
+                                <img src="images/Looks_One.png" class="icon"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" style="width:100px, height:100px">
+                        <button id="MatchNumberRemove" class="btn btn-sm btn-primary btn-round">
+                            <img src="images/remove4.png" class="icon"></img>
+                        </button>
+                        <input id="MatchNumber" type="text" value="0" min="0" max="130">
+                        <button id="MatchNumberAdd" class="btn btn-sm btn-primary btn-round">
+                            <img src="images/add2.png" class="icon"></img>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div> Competition Round
+                <div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="SetUpInline">
+                            <input type="radio" class="form-check-input" id="SetUpInline" name="startinglevel" value="option">Qual
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="SetUpInline1">
+                            <input type="radio" class="form-check-input" id="SetUpInline1" name="startinglevel" value="option2">Quarter
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="SetUpInline2">
+                            <input type="radio" class="form-check-input" id="SetUpInline2" name="startinglevel" value="option3">Semi
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="SetUpInline3">
+                            <input type="radio" class="form-check-input" id="SetUpInline3" name="startinglevel" value="option4">Final
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div> Alliance Side
+                <div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="AllianceInline">
+                            <input type="radio" class="form-check-input" id="AllianceInline" name="AllianceSide" value="option5">Red
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="AllianceInline1">
+                            <input type="radio" class="form-check-input" id="AllianceInline1" name="AllianceSide" value="option6">Blue
+                            <span class="circle"><span class="check"></span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="popup" onclick="AlliancePositionInfo()"> Alliance Position
+                    <span class="popuptext" id="myPopup3">Red side is inverse order</span>
+                </div>
+            </div>
+            <div class="col-md-12 ml-auto">
+                <!-- Trigger the Modal -->
+                <img id="myImg" src="images/HabF.png" alt="Habitat Positions" style="width:10%;max-width:300px">
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content" id="img01">
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
 	
 	<script>
 	// Get the modal
@@ -841,362 +832,351 @@
 	}
 	</script>
 	
-	</div>
-	</div>
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="RobotInline">
-			<input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">3
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="RobotInline1">
-			<input type="radio" class="form-check-input" id="RobotInline1" name="RoboPosition" value="option8">2
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="RobotInline2">
-			<input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">1
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div> Preloaded with
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="Preload1">
-			<input type="radio" class="form-check-input" id="Preload1" name="RobotPreload" value="option10">Cargo
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="Preload2">
-			<input type="radio" class="form-check-input" id="Preload2" name="RobotPreload" value="option11">Hatch Panel
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="Preload3">
-			<input type="radio" class="form-check-input" id="Preload3" name="RobotPreload" value="option12">None
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="main main-unraised">
-        <h2><a id="SandStorm">SandStorm</a></h2>
-	<div> Starting Level: Hab Platform
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SandStormInline">
-			<input type="radio" class="form-check-input" id="SandStormInline" name="SandStorm" value="option13">1
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SandStormInline1">
-			<input type="radio" class="form-check-input" id="SandStormInline1" name="SandStorm" value="option14">2
-			<span class="circle"><span class="check"></span></span>
-		</label>
-	</div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="SandStormInline2">
-			<input type="radio" class="form-check-input" id="SandStormInline2" name="SandStorm" value="option15">3
-			<span class="circle"><span class="check"></span></span>
-		</label>
-	</div>
-	<div> Did the robot cross the Hab-line?
-	<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="materialInline4">
-			<input type="radio" class="form-check-input" id="materialInline4" name="HabLine">Yes
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="materialInline5">
-			<input type="radio" class="form-check-input" id="materialInline5" name="HabLine">No
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-
-	<div class="main main-unraised">
-        <h2><a id="Cargo">Cargo</a></h2>
-		<div> Cargo Ship
-		<div class="col-md-12 ml-auto">
-		<button id="CargoButtonRemove3" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-	    </button>
-        <input id="CargoShip" type="text" value="0" min="0" max="4">
-		<button id="CargoButtonAdd3" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-    </div>
-	    </div>
-
-		<div class="col-md-12 ml-auto">
-		<div> Low Rocket
-		<div class="col-lg-14">
-		<button id="CargoButtonRemove" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-        <input id="CargoRocketLow" type="text" value="0" min="0" max="4">
-		<button id="CargoButtonAdd" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-	</button>
-    </div>
-		<div class="col-md-12 ml-auto">
-		<div> Mid Rocket
-		<div class="col-lg-14">
-		<button id="CargoButtonRemove1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-		<input id="CargoRocketMid" type="text" value="0" min="0" max="4">
-		<button id="CargoButtonAdd1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-    </div>
-		<div class="col-md-12 ml-auto">
-		<div> High Rocket
-		<div class="col-lg-14">
-		<button id="CargoButtonRemove2" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-	    </button>
-        <input id="CargoRocketHigh" type="text" value="0" min="0" max="4">
-		<button id="CargoButtonAdd2" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-	</div>
-	</div>		
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	
-	<div class="main main-unraised">
-        <h2><a id="HatchPanels">Hatch Panels</a></h2>
-		<div> Cargo Ship
-		<div class="col-md-12 ml-auto">
-		<button id="CargoButtonRemove4" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-	    </button>
-        <input id="HatchPanelShip" type="text" value="0" min="0" max="8">
-		<button id="CargoButtonAdd4" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-    </div>
-        </div>
-		
-		<div class="col-md-12 ml-auto">
-		<div> Low Rocket
-		<div class="col-lg-14">
-		<button id="HatchPanelButtonRemove" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-        <input id="HatchPanelRocketLow" type="text" value="0" min="0" max="4">
-		<button id="HatchPanelButtonAdd" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-	</div>
-	
-		<div class="col-md-12 ml-auto">
-		<div> Mid Rocket
-		<div class="col-lg-14">
-		<button id="HatchPanelButtonRemove1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-		<input id="HatchPanelRocketMid" type="text" value="0" min="0" max="4">
-		<button id="HatchPanelButtonAdd1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-    </div>
-	
-		<div class="col-md-12 ml-auto">
-		<div> High Rocket
-		<div class="col-lg-14">
-		<button id="HatchPanelButtonRemove2" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-	    </button>
-        <input id="HatchPanelRocketHigh" type="text" value="0" min="0" max="4">
-		<button id="HatchPanelButtonAdd2" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-		</button>
-	</div>
-	</div>
-
-	</div>
-	<div class="main main-unraised">
-       <h2><a id="EndGame">End Game</a></h2>
-		<div> Hab Level
-		<div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="EndGameLevel">
-			<input type="checkbox" class="form-check-input" id="EndGameLevel" name="EndGameHab" value="option16">1
-			<span class="form-check-sign"><span class="check"></span></span>
-		</label>
-    </div>
-		<div class="form-check form-check-inline">
-		<label class="form-check-label" for="EndGameLevel1">
-			<input type="checkbox" class="form-check-input" id="EndGameLevel1" name="EndGameHab" value="option17">2
-			<span class="form-check-sign"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="EndGameLevel2">
-			<input type="checkbox" class="form-check-input" id="EndGameLevel2" name="EndGameHab" value="option18">3
-			<span class="form-check-sign"><span class="check"></span></span>
-		</label>
-    </div>
-	<div>
-	<div> Buddy Climb
-	<div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="BuddyClimbEnd">
-			<input type="checkbox" class="form-check-input" id="BuddyClimbEnd" name="BuddyClimb" value="option19">Level 2
-			<span class="form-check-sign"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="BuddyClimbEnd1">
-			<input type="checkbox" class="form-check-input" id="BuddyClimbEnd1" name="BuddyClimb" value="option20">Level 3
-			<span class="form-check-sign"><span class="check"></span></span>
-		</label>
-    </div>
-	<div>
-	<div> Foul
-		<div class="col-lg-14">
-		<button id="FoulButtonRemove" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-        <input id="Foul" type="text" value="0" min="0" max="4">
-		<button id="FoulButtonAdd" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-	</button>
-    </div>
-	</div>
-	<div> Tech Foul
-		<div class="col-lg-14">
-		<button id="FoulButtonRemove1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-        <input id="TechFoul" type="text" value="0" min="0" max="4">
-		<button id="FoulButtonAdd1" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-	</button>
-    </div>
-	</div>
-	<div class="form-group bmd-form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <img src="images/Feedback.png" class="icon"></img>
-                    </span>
-                  </div>
-                  <input type="text" id="Notes" class="form-control" placeholder="Notes">
+            <div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="RobotInline">
+                        <input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">3
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
                 </div>
-              </div>
-	<div class="main main-unraised">
-       <h2><a id="MatchResult">Match Results</a></h2>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MatchResultEnd">
-			<input type="radio" class="form-check-input" id="MatchResultEnd" name="MatchResult">Tie
-			<span class="circle"><span class="check"></span></span>
-		</label>
-	</div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MatchResultEnd1">
-			<input type="radio" class="form-check-input" id="MatchResultEnd1" name="MatchResult">Win
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MatchResultEnd2">
-			<input type="radio" class="form-check-input" id="MatchResultEnd2" name="MatchResult">Loss
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div>
-	<div> RP earned
-	<div class="col-lg-14">
-	<img src="images/Grade.png" class="icon"></img>
-	<div class="col-lg-14">
-		<button id="RPButtonRemove" class="btn btn-sm btn-primary btn-round">
-			<img src="images/remove4.png" class="icon"></img>
-		</button>
-        <input id="RP" type="text" value="0" min="0" max="3">
-		<button id="RPButtonAdd" class="btn btn-sm btn-primary btn-round">
-			<img src="images/add2.png" class="icon"></img>
-	</button>
-    </div>
-	</div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="RobotInline1">
+                        <input type="radio" class="form-check-input" id="RobotInline1" name="RoboPosition" value="option8">2
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="RobotInline2">
+                        <input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">1
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+            <div> Preloaded with
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Preload1">
+                        <input type="radio" class="form-check-input" id="Preload1" name="RobotPreload" value="option10">Cargo
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Preload2">
+                        <input type="radio" class="form-check-input" id="Preload2" name="RobotPreload" value="option11">Hatch Panel
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Preload3">
+                        <input type="radio" class="form-check-input" id="Preload3" name="RobotPreload" value="option12">None
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
 
+        <h2><a id="SandStorm">SandStorm</a></h2>
+        <div> Starting Level: Hab Platform
+            <div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="SandStormInline">
+                        <input type="radio" class="form-check-input" id="SandStormInline" name="SandStorm" value="option13">1
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="SandStormInline1">
+                        <input type="radio" class="form-check-input" id="SandStormInline1" name="SandStorm" value="option14">2
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="SandStormInline2">
+                        <input type="radio" class="form-check-input" id="SandStormInline2" name="SandStorm" value="option15">3
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div> Did the robot cross the Hab-line?
+            <div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="materialInline4">
+                        <input type="radio" class="form-check-input" id="materialInline4" name="HabLine">Yes
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="materialInline5">
+                        <input type="radio" class="form-check-input" id="materialInline5" name="HabLine">No
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
 
-		<div class="form-check form-check-inline">
-		<div class="col-md-12 ml-auto">
-			<button id="save-button" class="btn btn-sm btn-primary btn-round">
-			<img src="images/Save.png" class="icon"></img>
-	</button>
-	</div>
-	</div>
+        <h2><a id="Cargo">Cargo</a></h2>
+        <div> Cargo Ship
+            <div class="col-md-12 ml-auto">
+                <button id="CargoButtonRemove3" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="CargoShip" type="text" value="0" min="0" max="4">
+                <button id="CargoButtonAdd3" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> Low Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="CargoButtonRemove" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="CargoRocketLow" type="text" value="0" min="0" max="4">
+                <button id="CargoButtonAdd" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> Mid Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="CargoButtonRemove1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="CargoRocketMid" type="text" value="0" min="0" max="4">
+                <button id="CargoButtonAdd1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> High Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="CargoButtonRemove2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="CargoRocketHigh" type="text" value="0" min="0" max="4">
+                <button id="CargoButtonAdd2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>		
 	
-	<div class="form-check form-check-inline">
-	<div class="col-md-12 ml-auto">
-		<button id="ClearButton" onclick="resetFunction()" class="btn btn-sm btn-primary btn-round">
-		<img src="images/Cached.png" class="icon"></img>
-	    </button>
+        <h2><a id="HatchPanels">Hatch Panels</a></h2>
+        <div> Cargo Ship
+            <div class="col-md-12 ml-auto">
+                <button id="CargoButtonRemove4" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="HatchPanelShip" type="text" value="0" min="0" max="8">
+                <button id="CargoButtonAdd4" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> Low Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="HatchPanelButtonRemove" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="HatchPanelRocketLow" type="text" value="0" min="0" max="4">
+                <button id="HatchPanelButtonAdd" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> Mid Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="HatchPanelButtonRemove1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="HatchPanelRocketMid" type="text" value="0" min="0" max="4">
+		        <button id="HatchPanelButtonAdd1" class="btn btn-sm btn-primary btn-round">
+			        <img src="images/add2.png" class="icon"></img>
+		        </button>
+            </div>
+        </div>
+        <div> High Rocket
+            <div class="col-md-12 ml-auto">
+                <button id="HatchPanelButtonRemove2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="HatchPanelRocketHigh" type="text" value="0" min="0" max="4">
+                <button id="HatchPanelButtonAdd2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+
+        <h2><a id="EndGame">End Game</a></h2>
+        <div> Hab Level
+            <div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="EndGameLevel">
+                        <input type="checkbox" class="form-check-input" id="EndGameLevel" name="EndGameHab" value="option16">1
+                        <span class="form-check-sign"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="EndGameLevel1">
+                        <input type="checkbox" class="form-check-input" id="EndGameLevel1" name="EndGameHab" value="option17">2
+                        <span class="form-check-sign"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="EndGameLevel2">
+                        <input type="checkbox" class="form-check-input" id="EndGameLevel2" name="EndGameHab" value="option18">3
+                        <span class="form-check-sign"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div> Buddy Climb
+            <div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="BuddyClimbEnd">
+                        <input type="checkbox" class="form-check-input" id="BuddyClimbEnd" name="BuddyClimb" value="option19">Level 2
+                        <span class="form-check-sign"><span class="check"></span></span>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label" for="BuddyClimbEnd1">
+                        <input type="checkbox" class="form-check-input" id="BuddyClimbEnd1" name="BuddyClimb" value="option20">Level 3
+                        <span class="form-check-sign"><span class="check"></span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div> Foul
+            <div class="col-lg-14">
+                <button id="FoulButtonRemove" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="Foul" type="text" value="0" min="0" max="4">
+                <button id="FoulButtonAdd" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div> Tech Foul
+            <div class="col-lg-14">
+                <button id="FoulButtonRemove1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="TechFoul" type="text" value="0" min="0" max="4">
+                <button id="FoulButtonAdd1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+	    <div class="form-group bmd-form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <img src="images/Feedback.png" class="icon"></img>
+                    </span>
+                </div>
+                <input type="text" id="Notes" class="form-control" placeholder="Notes">
+            </div>
+        </div>
+
+        <h2><a id="MatchResult">Match Results</a></h2>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label" for="MatchResultEnd">
+                <input type="radio" class="form-check-input" id="MatchResultEnd" name="MatchResult">Tie
+                <span class="circle"><span class="check"></span></span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label" for="MatchResultEnd1">
+                <input type="radio" class="form-check-input" id="MatchResultEnd1" name="MatchResult">Win
+                <span class="circle"><span class="check"></span></span>
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <label class="form-check-label" for="MatchResultEnd2">
+                <input type="radio" class="form-check-input" id="MatchResultEnd2" name="MatchResult">Loss
+                <span class="circle"><span class="check"></span></span>
+            </label>
+        </div>
+        <div> RP earned
+            <div class="col-lg-14">
+                <div>
+                    <img src="images/Grade.png" class="icon"></img>
+                </div>
+                <button id="RPButtonRemove" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="RP" type="text" value="0" min="0" max="3">
+                <button id="RPButtonAdd" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="form-check form-check-inline">
+            <div class="col-md-12 ml-auto">
+                <button id="save-button" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/Save.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <div class="col-md-12 ml-auto">
+                <button id="ClearButton" onclick="resetFunction()" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/Cached.png" class="icon"></img>
+                </button>
+	        </div>
+	    </div>
+        <div class="form-check form-check-inline">
+            <div class="col-md-12 ml-auto">
+                <button id="TopButton" onclick="topFunction()" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/Change_History.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+      </div>
+    </div>
+ </div>
 		
-		<script>
-		function resetFunction() {
-		if (confirm('Are you sure you want to clear?')==true){
-		location.reload(true);
-	}
-	}
+<script>
+
+    function resetFunction() {
+        if (confirm('Are you sure you want to clear?')==true){
+            location.reload(true);
+	    }
+    }
 	
-		</script>
-	</div>
-	</div>
-	
-	<div class="form-check form-check-inline">
-	<div class="col-md-12 ml-auto">
-		<button id="TopButton" onclick="topFunction()" class="btn btn-sm btn-primary btn-round">
-		<img src="images/Change_History.png" class="icon"></img>
-	    </button>
-	</div>
-	</div>
-		
-		
-		<script>
-		// When the user clicks on <div>, open the popup
-		function TeamPositionInfo() {
-		var popup = document.getElementById("myPopup");
-		popup.classList.toggle("show");
-	}
-		// When the user clicks on <div>, open the popup
-		function MatchNumberInfo() {
-		var popup = document.getElementById("myPopup2");
-		popup.classList.toggle("show");
-	}
-		// When the user clicks on <div>, open the popup
-		function AlliancePositionInfo() {
-		var popup = document.getElementById("myPopup3");
-		popup.classList.toggle("show");
-	}
-		$(document).ready(function() {
-		$('.image-link').magnificPopup({type:'image'});
-	});
-		function topFunction() {
-			document.body.scrollTop = 0;
-			document.documentElement.scrollTop = 0;
-	}
+    // When the user clicks on <div>, open the popup
+    function TeamPositionInfo() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    }
+    // When the user clicks on <div>, open the popup
+    function MatchNumberInfo() {
+        var popup = document.getElementById("myPopup2");
+        popup.classList.toggle("show");
+    }
+    // When the user clicks on <div>, open the popup
+    function AlliancePositionInfo() {
+        var popup = document.getElementById("myPopup3");
+        popup.classList.toggle("show");
+    }
+
+    $(document).ready(function() {
+        $('.image-link').magnificPopup({type:'image'});
+    });
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 </script>
 <script>
 	// When the user scrolls the page, execute myFunction 
 	//window.onscroll = function() {StickyNav()};
 
 	// Get the navbar
-	//var navbar = document.getElementById("navbar");
+	//var navbar = document.getElementById("appNavbar");
 
 	// Get the offset position of the navbar
 	//var sticky = navbar.offsetTop;

@@ -119,21 +119,30 @@
             scoutingData.PicturesCb = 'No';
         }
 		
-		scoutingData.Robothings = '';
-		if ( document.getElementById('RobotPos').checked ) {
-            scoutingData.Robothings = 'Low';
-        } else if ( document.getElementById('RobotPos1').checked ) {
-            scoutingData.Robothings = 'Mid';
-        } else if ( document.getElementById('RobotPos2').checked ) {
-            scoutingData.Robothings = 'High';
+		scoutingData.Robothings = {};
+        scoutingData.Robothings_1 = '0';
+        if ( document.getElementById('RobotPos').checked ) {
+            scoutingData.Robothings_1 = 'Low';
+        }
+        scoutingData.Robothings_2 = '0';
+        if ( document.getElementById('RobotPos1').checked ) {
+            scoutingData.Robothings_2 = 'Mid';
+        }
+        scoutingData.Robothings_3 = '0';
+        if ( document.getElementById('RobotPos2').checked ) {
+            scoutingData.Robothings_3 = 'High';
         }
 		
-		scoutingData.RoboPre = '';
-		if ( document.getElementById('RobotPre').checked ) {
-            scoutingData.RoboPre = 'Cargo';
-        } else if ( document.getElementById('RobotPre1').checked ) {
-            scoutingData.RoboPre = 'Hatch Panel';
+		scoutingData.RoboPre = {};
+        scoutingData.RoboPre_1 = '0';
+        if ( document.getElementById('RobotPre').checked ) {
+            scoutingData.RoboPre_1 = 'Cargo';
         }
+        scoutingData.RoboPre_2 = '0';
+        if ( document.getElementById('RobotPre1').checked ) {
+            scoutingData.RoboPre_2 = 'Hatch Panel';
+        }
+        
 		
 		scoutingData.AVS = '';
 		if ( document.getElementById('AV').checked ) {
@@ -144,7 +153,142 @@
 		
 		scoutingData.Pit.What = document.getElementById('what').value;
 		
+		scoutingData.HPRS = {};
+        scoutingData.HPRS_1 = '0';
+        if ( document.getElementById('HPR').checked ) {
+            scoutingData.HPRS_1 = 'Low';
+        }
+        scoutingData.HPRS_2 = '0';
+        if ( document.getElementById('HPR1').checked ) {
+            scoutingData.HPRS_2 = 'Mid';
+        }
+        scoutingData.HPRS_3 = '0';
+        if ( document.getElementById('HPR2').checked ) {
+            scoutingData.HPRS_3 = 'High';
+        }
 		
+		scoutingData.CRS = {};
+        scoutingData.CRS_1 = '0';
+        if ( document.getElementById('CR').checked ) {
+            scoutingData.CRS_1 = 'Low';
+        }
+        scoutingData.CRS_2 = '0';
+        if ( document.getElementById('CR1').checked ) {
+            scoutingData.CRS_2 = 'Mid';
+        }
+        scoutingData.CRS_3 = '0';
+        if ( document.getElementById('CR2').checked ) {
+            scoutingData.CRS_3 = 'High';
+        }
+		
+		scoutingData.Doess = '';
+		if ( document.getElementById('Does').checked ) {
+            scoutingData.Doess = 'Yes';
+        } else if ( document.getElementById('Does1').checked ) {
+            scoutingData.Doess = 'No';
+        }
+		
+		scoutingData.DoessC = '';
+		if ( document.getElementById('DoesC').checked ) {
+            scoutingData.DoessC = 'Yes';
+        } else if ( document.getElementById('DoesC1').checked ) {
+            scoutingData.DoessC = 'No';
+        }
+		
+		scoutingData.Pit.Code = document.getElementById('language').value;
+		
+		scoutingData.Pickup = {};
+        scoutingData.Pickup_1 = '0';
+        if ( document.getElementById('PickupHP').checked ) {
+            scoutingData.Pickup_1 = 'Floor';
+        }
+        scoutingData.Pickup_2 = '0';
+        if ( document.getElementById('PickupHP1').checked ) {
+            scoutingData.Pickup_2 = 'Loading Station';
+        }
+		
+		scoutingData.PickupC = {};
+        scoutingData.PickupC_1 = '0';
+        if ( document.getElementById('PickupCF').checked ) {
+            scoutingData.PickupC_1 = 'Floor';
+        }
+        scoutingData.PickupC_2 = '0';
+        if ( document.getElementById('PickupCF1').checked ) {
+            scoutingData.PickupC_2 = 'Loading Station';
+        }
+		
+		scoutingData.CrossHL = '';
+		if ( document.getElementById('Cross').checked ) {
+            scoutingData.CrossHL = 'Yes';
+        } else if ( document.getElementById('Cross1').checked ) {
+            scoutingData.CrossHL = 'No';
+        }
+		
+		scoutingData.SpeedRD = '';
+		if ( document.getElementById('Speed').checked ) {
+            scoutingData.SpeedRD = 'Fast';
+        } else if ( document.getElementById('Speed1').checked ) {
+            scoutingData.SpeedRD = 'Medium';
+        } else if ( document.getElementById('Speed2').checked ) {
+            scoutingData.SpeedRD = 'Slow';
+        }
+		
+		scoutingData.ClimbsLS = {};
+        scoutingData.ClimbsLS_1 = '0';
+        if ( document.getElementById('ClimbsL').checked ) {
+            scoutingData.ClimbsLS_1 = 'Level 1';
+        }
+        scoutingData.ClimbsLS_2 = '0';
+        if ( document.getElementById('ClimbsL1').checked ) {
+            scoutingData.ClimbsLS_2 = 'Level 2';
+        }
+        scoutingData.ClimbsLS_3 = '0';
+        if ( document.getElementById('ClimbsL2').checked ) {
+            scoutingData.ClimbsLS_3 = 'Level 3';
+        }
+		
+		scoutingData.ClimbSS = '';
+		if ( document.getElementById('ClimbS').checked ) {
+            scoutingData.ClimbSS = 'Fast';
+        } else if ( document.getElementById('ClimbS1').checked ) {
+            scoutingData.ClimbSS = 'Medium';
+        } else if ( document.getElementById('ClimbS2').checked ) {
+            scoutingData.ClimbSS = 'Slow';
+        }
+		
+		scoutingData.BClimb = {};
+        scoutingData.BClimb_1 = '0';
+        if ( document.getElementById('BuddyClimb').checked ) {
+            scoutingData.BClimb_1 = '1 Robot';
+        }
+        scoutingData.BClimb_2 = '0';
+        if ( document.getElementById('BuddyClimb1').checked ) {
+            scoutingData.BClimb_2 = '2 Robots';
+        }
+        scoutingData.BClimb_3 = '0';
+        if ( document.getElementById('BuddyClimb2').checked ) {
+            scoutingData.BClimb_3 = 'None';
+        }
+		
+		scoutingData.Pit.Buddy = document.getElementById('howclimb').value;
+		
+		scoutingData.MultDT = '';
+		if ( document.getElementById('MultiD').checked ) {
+            scoutingData.MultDT = 'Yes';
+        } else if ( document.getElementById('MultiD1').checked ) {
+            scoutingData.MultDT = 'No';
+        }
+		
+		scoutingData.Many = '';
+		if ( document.getElementById('MultiM').checked ) {
+            scoutingData.Many = '2';
+        } else if ( document.getElementById('MultiM1').checked ) {
+            scoutingData.Many = '3';
+        } else if ( document.getElementById('MultiM2').checked ) {
+            scoutingData.Many = '4';
+        }
+		
+		scoutingData.Pit.Notes = document.getElementById('notes').value;
 
         // /////////////////////////////////////////////////////////////////// //
         //
@@ -579,13 +723,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PickupC">
-			<input type="checkbox" class="form-check-input" id="PickupC" name="PickupC" value="option29">Floor
+			<input type="checkbox" class="form-check-input" id="PickupCF" name="PickupC" value="option29">Floor
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PickupC1">
-			<input type="checkbox" class="form-check-input" id="PickupC1" name="PickupC" value="option30">Loading Station
+			<input type="checkbox" class="form-check-input" id="PickupCF1" name="PickupC" value="option30">Loading Station
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>

@@ -514,18 +514,52 @@
     </div>
 	</div>
 	<div>
+	<div> Multiple Driveteams?
+	<div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="MultiD">
+			<input type="radio" class="form-check-input" id="MultiD" name="MultDT" value="option4">Yes
+			<span class="circle"><span class="check"></span></span>
+		</label>
+    </div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="MultiD1">
+			<input type="radio" class="form-check-input" id="MultiD1" name="MultDT" value="option5">No
+			<span class="circle"><span class="check"></span></span>
+		</label>
+    </div>
+	<div> If multiple, How many?
+	<div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="MultiM">
+			<input type="radio" class="form-check-input" id="MultiM" name="Many" value="option6">2
+			<span class="circle"><span class="check"></span></span>
+		</label>
+    </div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="MultiM1">
+			<input type="radio" class="form-check-input" id="MultiM1" name="Many" value="option7">3
+			<span class="circle"><span class="check"></span></span>
+		</label>
+    </div>
+	<div class="form-check form-check-inline">
+		<label class="form-check-label" for="MultiM2">
+			<input type="radio" class="form-check-input" id="MultiM2" name="Many" value="option8">4
+			<span class="circle"><span class="check"></span></span>
+		</label>
+    </div>
 	<div class="col-lg-12">
 	<div> Picture Of Collector
 		</div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureC">
-			<input type="radio" class="form-check-input" id="PictureC" name="PicturesC" value="option4">Yes
+			<input type="radio" class="form-check-input" id="PictureC" name="PicturesC" value="option9">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureC1">
-			<input type="radio" class="form-check-input" id="PictureC1" name="PicturesC" value="option5">No
+			<input type="radio" class="form-check-input" id="PictureC1" name="PicturesC" value="option10">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -535,13 +569,13 @@
 		</div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureD">
-			<input type="radio" class="form-check-input" id="PictureD" name="PicturesD" value="option6">Yes
+			<input type="radio" class="form-check-input" id="PictureD" name="PicturesD" value="option11">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureD1">
-			<input type="radio" class="form-check-input" id="PictureD1" name="PicturesD" value="option7">No
+			<input type="radio" class="form-check-input" id="PictureD1" name="PicturesD" value="option12">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -551,16 +585,23 @@
 		</div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureCb">
-			<input type="radio" class="form-check-input" id="PictureCb" name="PicturesCb" value="option8">Yes
+			<input type="radio" class="form-check-input" id="PictureCb" name="PicturesCb" value="option13">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PictureCb1">
-			<input type="radio" class="form-check-input" id="PictureCb1" name="PicturesCb" value="option9">No
+			<input type="radio" class="form-check-input" id="PictureCb1" name="PicturesCb" value="option14">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
+	</div>
+	<div class="form-check form-check-inline">
+	<div class="col-md-12 ml-auto">
+		<button id="Camera" onclick="takePicture()" class="btn btn-sm btn-primary btn-round">
+		<img src="images/camera_enchance.png" class="icon"></img>
+	    </button>
+	</div>
 	</div>
 	
 	<div class="main main-unraised">
@@ -569,19 +610,19 @@
 		<div>
 		<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotPos">
-			<input type="checkbox" class="form-check-input" id="RobotPos" name="Robothings" value="option10">Low
+			<input type="checkbox" class="form-check-input" id="RobotPos" name="Robothings" value="option15">Low
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotPos1">
-			<input type="checkbox" class="form-check-input" id="RobotPos1" name="Robothings" value="option11">Mid
+			<input type="checkbox" class="form-check-input" id="RobotPos1" name="Robothings" value="option16">Mid
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotPos2">
-			<input type="checkbox" class="form-check-input" id="RobotPos2" name="Robothings" value="option12">High
+			<input type="checkbox" class="form-check-input" id="RobotPos2" name="Robothings" value="option17">High
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -589,13 +630,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotPre">
-			<input type="checkbox" class="form-check-input" id="RobotPre" name="RoboPre" value="option13">Cargo
+			<input type="checkbox" class="form-check-input" id="RobotPre" name="RoboPre" value="option18">Cargo
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="RobotPre1">
-			<input type="checkbox" class="form-check-input" id="RobotPre1" name="RoboPre" value="option14">Hatch Panel
+			<input type="checkbox" class="form-check-input" id="RobotPre1" name="RoboPre" value="option19">Hatch Panel
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -605,13 +646,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="AV">
-			<input type="radio" class="form-check-input" id="AV" name="AVS" value="option15">Auto
+			<input type="radio" class="form-check-input" id="AV" name="AVS" value="option20">Auto
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="AV1">
-			<input type="radio" class="form-check-input" id="AV1" name="AVS" value="option16">Vision
+			<input type="radio" class="form-check-input" id="AV1" name="AVS" value="option21">Vision
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -631,19 +672,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="HPR">
-			<input type="checkbox" class="form-check-input" id="HPR" name="HPRS" value="option17">Low
+			<input type="checkbox" class="form-check-input" id="HPR" name="HPRS" value="option22">Low
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="HPR1">
-			<input type="checkbox" class="form-check-input" id="HPR1" name="HPRS" value="option18">Mid
+			<input type="checkbox" class="form-check-input" id="HPR1" name="HPRS" value="option23">Mid
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="HPR2">
-			<input type="checkbox" class="form-check-input" id="HPR2" name="HPRS" value="option19">High
+			<input type="checkbox" class="form-check-input" id="HPR2" name="HPRS" value="option24">High
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -651,19 +692,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="CR">
-			<input type="checkbox" class="form-check-input" id="CR" name="CRS" value="option20">Low
+			<input type="checkbox" class="form-check-input" id="CR" name="CRS" value="option25">Low
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="CR1">
-			<input type="checkbox" class="form-check-input" id="CR1" name="CRS" value="option21">Mid
+			<input type="checkbox" class="form-check-input" id="CR1" name="CRS" value="option26">Mid
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="CR2">
-			<input type="checkbox" class="form-check-input" id="CR2" name="CRS" value="option22">High
+			<input type="checkbox" class="form-check-input" id="CR2" name="CRS" value="option27">High
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -671,13 +712,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Does">
-			<input type="radio" class="form-check-input" id="Does" name="Doess" value="option23">Yes
+			<input type="radio" class="form-check-input" id="Does" name="Doess" value="option28">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Does1">
-			<input type="radio" class="form-check-input" id="Does1" name="Doess" value="option24">No
+			<input type="radio" class="form-check-input" id="Does1" name="Doess" value="option29">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -685,13 +726,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="DoesC">
-			<input type="radio" class="form-check-input" id="DoesC" name="DoessC" value="option25">Yes
+			<input type="radio" class="form-check-input" id="DoesC" name="DoessC" value="option30">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="DoesC1">
-			<input type="radio" class="form-check-input" id="DoesC1" name="DoessC" value="option26">No
+			<input type="radio" class="form-check-input" id="DoesC1" name="DoessC" value="option31">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -709,27 +750,27 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PickupHP">
-			<input type="checkbox" class="form-check-input" id="PickupHP" name="Pickup" value="option27">Floor
+			<input type="checkbox" class="form-check-input" id="PickupHP" name="Pickup" value="option32">Floor
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="PickupHP1">
-			<input type="checkbox" class="form-check-input" id="PickupHP1" name="Pickup" value="option28">Loading Station
+			<input type="checkbox" class="form-check-input" id="PickupHP1" name="Pickup" value="option33">Loading Station
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div> Pickup Cargo From...
 	<div>
 	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="PickupC">
-			<input type="checkbox" class="form-check-input" id="PickupCF" name="PickupC" value="option29">Floor
+		<label class="form-check-label" for="PickupCF">
+			<input type="checkbox" class="form-check-input" id="PickupCF" name="PickupC" value="option34">Floor
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="PickupC1">
-			<input type="checkbox" class="form-check-input" id="PickupCF1" name="PickupC" value="option30">Loading Station
+		<label class="form-check-label" for="PickupCF1">
+			<input type="checkbox" class="form-check-input" id="PickupCF1" name="PickupC" value="option35">Loading Station
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -737,13 +778,13 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Cross">
-			<input type="radio" class="form-check-input" id="Cross" name="CrossHL" value="option31">Yes
+			<input type="radio" class="form-check-input" id="Cross" name="CrossHL" value="option36">Yes
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Cross1">
-			<input type="radio" class="form-check-input" id="Cross1" name="CrossHL" value="option32">No
+			<input type="radio" class="form-check-input" id="Cross1" name="CrossHL" value="option37">No
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -751,19 +792,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Speed">
-			<input type="radio" class="form-check-input" id="Speed" name="SpeedRD" value="option33">Fast
+			<input type="radio" class="form-check-input" id="Speed" name="SpeedRD" value="option38">Fast
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Speed1">
-			<input type="radio" class="form-check-input" id="Speed1" name="SpeedRD" value="option34">Medium
+			<input type="radio" class="form-check-input" id="Speed1" name="SpeedRD" value="option39">Medium
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Speed2">
-			<input type="radio" class="form-check-input" id="Speed2" name="SpeedRD" value="option35">Slow
+			<input type="radio" class="form-check-input" id="Speed2" name="SpeedRD" value="option40">Slow
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -773,19 +814,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbL">
-			<input type="checkbox" class="form-check-input" id="ClimbL" name="ClimbLS" value="option36">Level 1
+			<input type="checkbox" class="form-check-input" id="ClimbL" name="ClimbLS" value="option41">Level 1
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbL1">
-			<input type="checkbox" class="form-check-input" id="ClimbL1" name="ClimbLS" value="option37">Level 2
+			<input type="checkbox" class="form-check-input" id="ClimbL1" name="ClimbLS" value="option42">Level 2
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbL2">
-			<input type="checkbox" class="form-check-input" id="ClimbL2" name="ClimbLS" value="option38">Level 3
+			<input type="checkbox" class="form-check-input" id="ClimbL2" name="ClimbLS" value="option43">Level 3
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -793,19 +834,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbS">
-			<input type="radio" class="form-check-input" id="ClimbS" name="ClimbSS" value="option39">Fast
+			<input type="radio" class="form-check-input" id="ClimbS" name="ClimbSS" value="option44">Fast
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbS1">
-			<input type="radio" class="form-check-input" id="ClimbS1" name="ClimbSS" value="option40">Medium
+			<input type="radio" class="form-check-input" id="ClimbS1" name="ClimbSS" value="option45">Medium
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="ClimbS2">
-			<input type="radio" class="form-check-input" id="ClimbS2" name="ClimbSS" value="option41">Slow
+			<input type="radio" class="form-check-input" id="ClimbS2" name="ClimbSS" value="option46">Slow
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
@@ -813,19 +854,19 @@
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="BuddyClimb">
-			<input type="checkbox" class="form-check-input" id="BuddyClimb" name="BClimb" value="option42">1 Robot
+			<input type="checkbox" class="form-check-input" id="BuddyClimb" name="BClimb" value="option47">1 Robot
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="BuddyClimb1">
-			<input type="checkbox" class="form-check-input" id="BuddyClimb1" name="BClimb" value="option43">2 Robots
+			<input type="checkbox" class="form-check-input" id="BuddyClimb1" name="BClimb" value="option48">2 Robots
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="BuddyClimb2">
-			<input type="checkbox" class="form-check-input" id="BuddyClimb2" name="BClimb" value="option44">None
+			<input type="checkbox" class="form-check-input" id="BuddyClimb2" name="BClimb" value="option49">None
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
@@ -838,40 +879,6 @@
 			</div>
         <input id=howclimb type="text" class="form-control" placeholder="How does Robot Buddy Climb">
 	</div>
-    </div>
-	<div> Multiple Driveteams?
-	<div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MultiD">
-			<input type="radio" class="form-check-input" id="MultiD" name="MultDT" value="option45">Yes
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MultiD1">
-			<input type="radio" class="form-check-input" id="MultiD1" name="MultDT" value="option46">No
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div> If multiple, How many?
-	<div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MultiM">
-			<input type="radio" class="form-check-input" id="MultiM" name="Many" value="option47">2
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MultiM1">
-			<input type="radio" class="form-check-input" id="MultiM1" name="Many" value="option48">3
-			<span class="circle"><span class="check"></span></span>
-		</label>
-    </div>
-	<div class="form-check form-check-inline">
-		<label class="form-check-label" for="MultiM2">
-			<input type="radio" class="form-check-input" id="MultiM2" name="Many" value="option49">4
-			<span class="circle"><span class="check"></span></span>
-		</label>
     </div>
 	<div class="form-group bmd-form-group">
 		<div class="input-group">
@@ -918,13 +925,6 @@
 	}
 	
 		</script>
-	</div>
-	</div>
-	<div class="form-check form-check-inline">
-	<div class="col-md-12 ml-auto">
-		<button id="Camera" onclick="takePicture()" class="btn btn-sm btn-primary btn-round">
-		<img src="images/camera_enchance.png" class="icon"></img>
-	    </button>
 	</div>
 	</div>
 	

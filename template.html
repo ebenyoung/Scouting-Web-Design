@@ -19,8 +19,10 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <!--     Fonts and icons     -->
+<!--
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+-->
   <!-- Material Kit CSS -->
   <link href="assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
   
@@ -85,6 +87,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="sync-selection">Sync Method</label>
+                                <div class="input-group" id="sync-input">
+                                    <input type="text" class="form-control" placeholder="Bluetooth" id="sync-selection">
+                                    <div id="sync-selections" class="input-group-btn">
+                                        <button id="sync-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="sync-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <br>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="enable-debug">
@@ -145,6 +159,18 @@
         competitionLabel.value = competitionName;
     }
 
+    function loadSyncMethods(syncElem) {
+        // load the set of sync methods into this page
+        syncSelections = [ 'Bluetooth', 'HTTP' ];
+        for ( var i=0; i<syncSelections.length; i++ ) {
+            $('#' + syncElem + ' ul').append('<li><a href="#" id="setEditSyncMethod' + syncSelections[i] + '">' + syncSelections[i] + '</a></li>');
+        }
+    }
+    function setSyncMethod( syncMethod ) {
+        var syncLabel = document.getElementById('sync-selection');
+        syncLabel.value = syncMethod;
+    }
+
     function editSettings() {
         $('#season-selection').attr('value',settings.season.name);
         $("#season-input").removeClass("is-empty");
@@ -152,6 +178,8 @@
         $("#competition-input").removeClass("is-empty");
         $('#server-ipaddress').attr('value',settings.server.ipaddress);
         $('#server-port').attr('value',settings.server.port);
+        $('#sync-selection').attr('value',settings.sync.method);
+        $("#sync-input").removeClass("is-empty");
         $("#enable-debug").prop('checked', settings.debug);
 
         $('#editSettingsModal').modal('toggle');
@@ -162,6 +190,7 @@
         settings.debug = document.getElementById('enable-debug').checked;
         settings.server.ipaddress = document.getElementById('server-ipaddress').value;
         settings.server.port = document.getElementById('server-port').value;
+        settings.sync.method = document.getElementById('sync-selection').value;
         localStorage.settings = JSON.stringify( settings );
         location.reload();
     }
@@ -176,12 +205,15 @@
                 settings.competition = {code: 'Default', name: 'Default Event' };
             if ( settings.server == null )
                 settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+            if ( settings.sync == null )
+                settings.sync = { method: 'Bluetooth' };
         } catch(err) {
             console.log( 'No stored settings setting up defaults' );
 
             settings.season = {name: '2019' };
             settings.competition = {code: 'Default', name: 'Default Event' };
             settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+            settings.sync = { method: 'Bluetooth' };
             localStorage.settings = JSON.stringify( settings );
         }
     }
@@ -429,14 +461,16 @@
     // Some of the parameters are currently hardcoded, but will be 
     // set through configuration
     //
-    function syncScoutingFiles() {
+    function syncFiles(directory) {
         var season = settings.season.name;
         var eventCode = settings.competition.code;
 
         var updateCntrl = {};
-        updateCntrl.sync_method = 'Bluetooth';
+        updateCntrl.sync_method = settings.sync.method;
+        updateCntrl.server_address = settings.server.ipaddress;
+        updateCntrl.server_port = settings.server.port;
         updateCntrl.sync_control = 'Upload_Only';
-        updateCntrl.paths = [ 'static/data/'+ eventCode + season + '/ScoutingData/' ];
+        updateCntrl.paths = [ 'static/data/'+ eventCode + season + '/' + directory + '/' ];
         updateCntrlJson = JSON.stringify(updateCntrl);
 
         if ( settings.debug )
@@ -448,6 +482,13 @@
                 .done(function( data ) {
                     setTimeout(function(){ location.reload; }, 5000);
                 });
+    }
+    function syncScoutingFiles() {
+        syncFiles('ScoutingData');
+    }
+
+    function syncScoutingPictures() {
+        syncFiles('ScoutingPictures');
     }
 
     function buttonMinus(elem) {
@@ -506,6 +547,7 @@
         loadSettings();
         loadSeasons('season-selections');
         loadCompetitions('competition-selections');
+        loadSyncMethods('sync-selections');
 
         loadScoutingSessionInfo();
 
@@ -531,6 +573,17 @@
             }
         });
 
+        $('#sync-selections').on('click', '.dropdown-menu li a', function () {
+            setSyncMethod( $(this).text() );
+        });
+        $('#sync-selection').on('click', function () {
+            if ( !$('#sync-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#sync-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
         $('#edit-settings-option').on('click', function () {
             editSettings();
         });
@@ -551,6 +604,9 @@
         });
         $('#sync-option').on('click', function () {
             syncScoutingFiles();
+        });
+        $('#sync-pictures').on('click', function () {
+            syncScoutingPictures();
         });
 		
 		$('#MatchNumberRemove').on('click', function () {
@@ -683,6 +739,11 @@
               <img src="images/Import_Export.png" class="icon"></img> Sync
             </a>
           </li>
+          <li id="sync-pictures" class="nav-item">
+            <a href="#" class="nav-link">
+              <img src="images/Import_Export.png" class="icon"></img> Sync Pictures
+            </a>
+          </li>
         </ul>
       </div>
 		
@@ -811,22 +872,26 @@
             </div>
 	
 	<script>
-	// Get the modal
-	var modal = document.getElementById('myModal');
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var modal = document.getElementById('myModal');
 	var img = document.getElementById('myImg');
 	var modalImg = document.getElementById("img01");
 	var captionText = document.getElementById("caption");
-	img.onclick = function(){
-		modal.style.display = "block";
-		modalImg.src = this.src;
-		captionText.innerHTML = this.alt;
+
+	img.onclick = function() {
+        if ( modal.style.display == "block" ) {
+			modal.style.display = "none";
+        } else {
+		    modal.style.display = "block";
+		    modalImg.src = this.src;
+		    captionText.innerHTML = this.alt;
+        }
 	}
 
 	//When the user clicks outside of the window, close the modal
 	window.onclick = function(event) {
-		if (event.target == modal) {
+		if (event.target == modalImg) {
 			modal.style.display = "none";
 		}
 	}
@@ -1163,9 +1228,11 @@
         popup.classList.toggle("show");
     }
 
+/*
     $(document).ready(function() {
         $('.image-link').magnificPopup({type:'image'});
     });
+*/
 
     function topFunction() {
         document.body.scrollTop = 0;

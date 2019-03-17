@@ -188,9 +188,9 @@
         settings.season.name = document.getElementById('season-selection').value;
         settings.competition.code = document.getElementById('competition-selection').value;
         settings.debug = document.getElementById('enable-debug').checked;
-        settings.server.ipaddress = document.getElementById('server-ipaddress').value;
-        settings.server.port = document.getElementById('server-port').value;
-        settings.sync.method = document.getElementById('sync-selection').value;
+        settings.server.ipaddress = document.getElementById('server-ipaddress').value.trim();
+        settings.server.port = document.getElementById('server-port').value.trim();
+        settings.sync.method = document.getElementById('sync-selection').value.trim();
         localStorage.settings = JSON.stringify( settings );
         location.reload();
     }
@@ -321,13 +321,13 @@
         }
 
         scoutingData.Cargo = {};
-        scoutingData.Cargo.Cargo_Ship = $('#myRange').val();
+        scoutingData.Cargo.Cargo_Ship = $('#CargoShip').val();
         scoutingData.Cargo.Low = $('#CargoRocketLow').val();
         scoutingData.Cargo.Med = $('#CargoRocketMid').val();
         scoutingData.Cargo.High = $('#CargoRocketHigh').val();
 
         scoutingData.Hatch_Panels = {};
-        scoutingData.Hatch_Panels.Cargo_Ship = $('#biRange').val();
+        scoutingData.Hatch_Panels.Cargo_Ship = $('#HatchPanelShip').val();
         scoutingData.Hatch_Panels.Low = $('#HatchPanelRocketLow').val();
         scoutingData.Hatch_Panels.Med = $('#HatchPanelRocketMid').val();
         scoutingData.Hatch_Panels.High = $('#HatchPanelRocketHigh').val();
@@ -354,8 +354,8 @@
             scoutingData.End_Game.Level_3_Buddy_Climb = '1';
         }
 
-        scoutingData.End_Game.Foul = document.getElementById('FoulInfo').value;
-        scoutingData.End_Game.Tech_Foul = document.getElementById('TechFoulInfo').value;
+        scoutingData.End_Game.Foul = document.getElementById('Foul').value;
+        scoutingData.End_Game.Tech_Foul = document.getElementById('TechFoul').value;
 		scoutingData.End_Game.Notes = document.getElementById('Notes').value;
 
         scoutingData.Match_Results = {};
@@ -890,10 +890,8 @@
 	}
 
 	//When the user clicks outside of the window, close the modal
-	window.onclick = function(event) {
-		if (event.target == modalImg) {
-			modal.style.display = "none";
-		}
+	modalImg.onclick = function() {
+		modal.style.display = "none";
 	}
 	</script>
 	

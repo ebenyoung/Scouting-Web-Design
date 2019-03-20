@@ -25,10 +25,159 @@
 
 </head>
 
+<body>
+
+    <div class="modal fade" id='editSettingsModal' >
+        <div class="modal-dialog" style= 'width:600px'>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Edit Settings</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div id='edit_warning'></div>
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="season-selection">Season</label>
+                                <div class="input-group" id="season-input">
+                                    <input type="text" class="form-control" placeholder="Season..." id="season-selection">
+                                    <div id="season-selections" class="input-group-btn">
+                                        <button id="season-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="season-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="competition-selection">Competition</label>
+                                <div class="input-group" id="competition-input">
+                                    <input type="text" class="form-control" placeholder="Competition..." id="competition-selection">
+                                    <div id="competition-selections" class="input-group-btn">
+                                        <button id="competition-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="competition-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="server-ipaddress">Server IP Address</label>
+                                <div class="input-group" id="server-ipaddress-input">
+                                    <input type="text" class="form-control" placeholder="Server IpAddress..." id="server-ipaddress">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="server-port">Server Port</label>
+                                <div class="input-group" id="server-port-input">
+                                    <input type="text" class="form-control" placeholder="Server Port(8080)..." id="server-port">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 col-sm-12">
+                                <label for="sync-selection">Sync Method</label>
+                                <div class="input-group" id="sync-input">
+                                    <input type="text" class="form-control" placeholder="Bluetooth" id="sync-selection">
+                                    <div id="sync-selections" class="input-group-btn">
+                                        <button id="sync-selection-dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+                                        <ul id="sync-selection-menu" class="dropdown-menu pull-right" role="menu"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="enable-debug">
+                                <input type="checkbox" class="form-check-input" id="enable-debug" name="enable-debug" value="option19">Enable Debug Logging
+                                <span class="form-check-sign"><span class="check"></span></span>
+                            </label>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+	                <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-primary btn-round" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-round" id='submit-edit-settings' onClick='submitEditSettings()'>Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <script>
 
     var settings = {};
 
+    var settings = {};
+    var seasonSelections = new Object();
+    var competitionSelections = new Object();
+
+    function loadSeasons(seasonElem) {
+        // load the set of seasons into this page
+        seasonSelections = [ '2019' ];
+        for ( var i=0; i<seasonSelections.length; i++ ) {
+            $('#' + seasonElem + ' ul').append('<li><a href="#" id="setEditSeason' + seasonSelections[i] + '">' + seasonSelections[i] + '</a></li>');
+        }
+    }
+    function setSeason( seasonName ) {
+        var seasonLabel = document.getElementById('season-selection');
+        seasonLabel.value = seasonName;
+    }
+
+    function loadCompetitions(competitionElem) {
+        // load the set of competitions into this page
+        competitionSelections = [ 'WEEK0', 'NHGRS', 'MAREA', 'NHDUR', 'NHSNH', 'NECMP' ];
+        for ( var i=0; i<competitionSelections.length; i++ ) {
+            $('#' + competitionElem + ' ul').append('<li><a href="#" id="setEditCompetition' + competitionSelections[i] + '">' + competitionSelections[i] + '</a></li>');
+        }
+    }
+    function setCompetition( competitionName ) {
+        var competitionLabel = document.getElementById('competition-selection');
+        competitionLabel.value = competitionName;
+    }
+
+    function loadSyncMethods(syncElem) {
+        // load the set of sync methods into this page
+        syncSelections = [ 'Bluetooth', 'HTTP' ];
+        for ( var i=0; i<syncSelections.length; i++ ) {
+            $('#' + syncElem + ' ul').append('<li><a href="#" id="setEditSyncMethod' + syncSelections[i] + '">' + syncSelections[i] + '</a></li>');
+        }
+    }
+    function setSyncMethod( syncMethod ) {
+        var syncLabel = document.getElementById('sync-selection');
+        syncLabel.value = syncMethod;
+    }
+
+    function editSettings() {
+        $('#season-selection').attr('value',settings.season.name);
+        $("#season-input").removeClass("is-empty");
+        $('#competition-selection').attr('value',settings.competition.code);
+        $("#competition-input").removeClass("is-empty");
+        $('#server-ipaddress').attr('value',settings.server.ipaddress);
+        $('#server-port').attr('value',settings.server.port);
+        $('#sync-selection').attr('value',settings.sync.method);
+        $("#sync-input").removeClass("is-empty");
+        $("#enable-debug").prop('checked', settings.debug);
+
+        $('#editSettingsModal').modal('toggle');
+    }
+
+    function submitEditSettings() {
+        settings.season.name = document.getElementById('season-selection').value;
+        settings.competition.code = document.getElementById('competition-selection').value;
+        settings.debug = document.getElementById('enable-debug').checked;
+        settings.server.ipaddress = document.getElementById('server-ipaddress').value;
+        settings.server.port = document.getElementById('server-port').value;
+        settings.sync.method = document.getElementById('sync-selection').value;
+        localStorage.settings = JSON.stringify( settings );
+        location.reload();
+    }
     function loadSettings() {
         // load the stored settings from the browser storage to remember any
         // settings that the user may have set the last time.
@@ -40,12 +189,15 @@
                 settings.competition = {code: 'Default', name: 'Default Event' };
             if ( settings.server == null )
                 settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+            if ( settings.sync == null )
+                settings.sync = { method: 'Bluetooth' };
         } catch(err) {
             console.log( 'No stored settings setting up defaults' );
 
             settings.season = {name: '2019' };
             settings.competition = {code: 'Default', name: 'Default Event' };
             settings.server = { ipaddress: '192.168.1.136', port: '8080' };
+            settings.sync = { method: 'Bluetooth' };
             localStorage.settings = JSON.stringify( settings );
         }
     }
@@ -72,12 +224,87 @@
         return scoutingInfo;
     }
 
+    //
+    // Function will issue a request to update the scouting app from the 
+    // central server.
+    //
+    // Some of the parameters are currently hardcoded, but will be 
+    // set through configuration
+    //
+    function updateScoutingApp(paramStr) {
+        var updateCntrl = {};
+        updateCntrl.sync_method = 'HTTP';
+        updateCntrl.sync_control = 'Download_Updates';
+        updateCntrl.paths = [ 'static/scouting-app/' ];
+        updateCntrl.server_address = settings.server.ipaddress;
+        updateCntrl.server_port = settings.server.port;
+        updateCntrlJson = JSON.stringify(updateCntrl);
+
+        if ( settings.debug ) {
+            if ( paramStr.length > 0 ) {
+                paramStr += '&debug=true';
+            } else {
+                paramStr = '?debug=true';
+            }
+        }
+
+        $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
+                .done(function( data ) {
+                    setTimeout(function(){ location.reload; }, 5000);
+                });
+    }
+    function updateScoutingAppHTML() {
+        updateScoutingApp('');
+    }
+    function updateScoutingAppAll() {
+        updateScoutingApp('?recurse=true');
+    }
+
+    //
+    // Function will issue a request to sync the scouting data files with
+    // central server.
+    //
+    // Some of the parameters are currently hardcoded, but will be 
+    // set through configuration
+    //
+    function syncFiles(directory) {
+        var season = settings.season.name;
+        var eventCode = settings.competition.code;
+
+        var updateCntrl = {};
+        updateCntrl.sync_method = settings.sync.method;
+        updateCntrl.server_address = settings.server.ipaddress;
+        updateCntrl.server_port = settings.server.port;
+        updateCntrl.sync_control = 'Upload_Only';
+        updateCntrl.paths = [ 'static/data/'+ eventCode + season + '/' + directory + '/' ];
+        updateCntrlJson = JSON.stringify(updateCntrl);
+
+        if ( settings.debug )
+            paramStr = '?debug=true';
+        else
+            paramStr = '';
+
+        $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
+                .done(function( data ) {
+                    setTimeout(function(){ location.reload; }, 5000);
+                });
+    }
+    function syncScoutingFiles() {
+        syncFiles('ScoutingData');
+    }
+
+    function syncScoutingPictures() {
+        syncFiles('ScoutingPictures');
+    }
+
     function saveScoutingData() {
         var scoutingData = {};
+        var checkboxes = [];
+
+        scoutingData.Pit = {};
 
         // We will require a scouter name and team number, so check that 
         // those fields have been filled in.
-        scoutingData.Pit = {};
         scoutingData.Pit.Scouter = document.getElementById('scouter').value;
         if ( scoutingData.Pit.Scouter == '' ) {
             alert( 'Please Enter The Scouter Name' );
@@ -91,203 +318,203 @@
 		
 		scoutingData.Pit.DriveTrain = document.getElementById('drivetrain').value;
 		
-		scoutingData.DriveTeam = '';
+		scoutingData.Pit.DriveTeam = '';
 		if ( document.getElementById('DT').checked ) {
-            scoutingData.DriveTeam = 'Veteran';
+            scoutingData.Pit.DriveTeam = 'Veteran';
         } else if ( document.getElementById('DT1').checked ) {
-            scoutingData.DriveTeam = 'Rookie';
+            scoutingData.Pit.DriveTeam = 'Rookie';
         } else if ( document.getElementById('DT2').checked ) {
-            scoutingData.DriveTeam = 'Mixed';
+            scoutingData.Pit.DriveTeam = 'Mixed';
         }
 		
-		scoutingData.PicturesC = '';
+		scoutingData.Pit.Collector_Picture = '';
 		if ( document.getElementById('PictureC').checked ) {
-            scoutingData.PicturesC = 'Yes';
+            scoutingData.Pit.Collector_Picture = 'Yes';
         } else if ( document.getElementById('PictureC1').checked ) {
-            scoutingData.PicturesC = 'No';
+            scoutingData.Pit.Collector_Picture = 'No';
         }
 		
-		scoutingData.PicturesD = '';
+		scoutingData.Pit.Drivetrain_Picture = '';
 		if ( document.getElementById('PictureD').checked ) {
-            scoutingData.PicturesD = 'Yes';
+            scoutingData.Pit.Drivetrain_Picture = 'Yes';
         } else if ( document.getElementById('PictureD1').checked ) {
-            scoutingData.PicturesD = 'No';
+            scoutingData.Pit.Drivetrain_Picture = 'No';
         }
 		
-		scoutingData.PicturesCb = '';
+		scoutingData.Pit.Climber_Picture = '';
 		if ( document.getElementById('PictureCb').checked ) {
-            scoutingData.PicturesCb = 'Yes';
+            scoutingData.Pit.Climber_Picture = 'Yes';
         } else if ( document.getElementById('PictureCb1').checked ) {
-            scoutingData.PicturesCb = 'No';
+            scoutingData.Pit.Climber_Picture = 'No';
         }
 		
-		scoutingData.Robothings = {};
-        scoutingData.Robothings_1 = '0';
+        checkboxes = [];
         if ( document.getElementById('RobotPos').checked ) {
-            scoutingData.Robothings_1 = 'Low';
+            checkboxes.push('Low');
         }
-        scoutingData.Robothings_2 = '0';
         if ( document.getElementById('RobotPos1').checked ) {
-            scoutingData.Robothings_2 = 'Mid';
+            checkboxes.push('Mid');
         }
-        scoutingData.Robothings_3 = '0';
         if ( document.getElementById('RobotPos2').checked ) {
-            scoutingData.Robothings_3 = 'High';
+            checkboxes.push('High');
         }
+        scoutingData.Pit.Robot_Starting_Position = checkboxes.join();
 		
-		scoutingData.RoboPre = {};
-        scoutingData.RoboPre_1 = '0';
+        checkboxes = [];
         if ( document.getElementById('RobotPre').checked ) {
-            scoutingData.RoboPre_1 = 'Cargo';
+            checkboxes.push('Cargo');
         }
-        scoutingData.RoboPre_2 = '0';
         if ( document.getElementById('RobotPre1').checked ) {
-            scoutingData.RoboPre_2 = 'Hatch Panel';
+            checkboxes.push('Hatch_Panel');
         }
+        scoutingData.Pit.Robot_Preloaded_With = checkboxes.join();
         
 		
-		scoutingData.AVS = '';
+		scoutingData.Pit.Sandstorm_Auto_Vision = '';
 		if ( document.getElementById('AV').checked ) {
-            scoutingData.AVS = 'Auto';
+            scoutingData.Pit.Sandstorm_Auto_Vision = 'Auto';
         } else if ( document.getElementById('AV1').checked ) {
-            scoutingData.AVS = 'Vision';
+            scoutingData.Pit.Sandstorm_Auto_Vision = 'Vision';
         }
 		
-		scoutingData.Pit.What = document.getElementById('what').value;
+
+		scoutingData.Pit.Sandstorm_Actions = document.getElementById('what').value;
 		
-		scoutingData.HPRS = {};
-        scoutingData.HPRS_1 = '0';
+
+        checkboxes = [];
         if ( document.getElementById('HPR').checked ) {
-            scoutingData.HPRS_1 = 'Low';
+            checkboxes.push('Low');
         }
-        scoutingData.HPRS_2 = '0';
         if ( document.getElementById('HPR1').checked ) {
-            scoutingData.HPRS_2 = 'Mid';
+            checkboxes.push('Mid');
         }
-        scoutingData.HPRS_3 = '0';
         if ( document.getElementById('HPR2').checked ) {
-            scoutingData.HPRS_3 = 'High';
+            checkboxes.push('High');
         }
+        scoutingData.Pit.Hatch_Panel_Rocket_Height = checkboxes.join();
+
 		
-		scoutingData.CRS = {};
-        scoutingData.CRS_1 = '0';
+        checkboxes = [];
         if ( document.getElementById('CR').checked ) {
-            scoutingData.CRS_1 = 'Low';
+            checkboxes.push('Low');
         }
-        scoutingData.CRS_2 = '0';
         if ( document.getElementById('CR1').checked ) {
-            scoutingData.CRS_2 = 'Mid';
+            checkboxes.push('Mid');
         }
-        scoutingData.CRS_3 = '0';
         if ( document.getElementById('CR2').checked ) {
-            scoutingData.CRS_3 = 'High';
+            checkboxes.push('High');
         }
+        scoutingData.Pit.Cargo_Rocket_Height = checkboxes.join();
 		
-		scoutingData.Doess = '';
+
+		scoutingData.Pit.Hatch_Panel_Cargo_Ship = '';
 		if ( document.getElementById('Does').checked ) {
-            scoutingData.Doess = 'Yes';
+            scoutingData.Pit.Hatch_Panel_On_Cargo_Ship = 'Yes';
         } else if ( document.getElementById('Does1').checked ) {
-            scoutingData.Doess = 'No';
+            scoutingData.Pit.Hatch_Panel_On_Cargo_Ship = 'No';
         }
 		
-		scoutingData.DoessC = '';
+		scoutingData.Pit.Cargo_In_Cargo_Ship = '';
 		if ( document.getElementById('DoesC').checked ) {
-            scoutingData.DoessC = 'Yes';
+            scoutingData.Pit.Cargo_In_Cargo_Ship = 'Yes';
         } else if ( document.getElementById('DoesC1').checked ) {
-            scoutingData.DoessC = 'No';
+            scoutingData.Pit.Cargo_In_Cargo_Ship = 'No';
         }
 		
-		scoutingData.Pit.Code = document.getElementById('language').value;
+		scoutingData.Pit.Robot_Programming_Language = document.getElementById('language').value;
 		
-		scoutingData.Pickup = {};
-        scoutingData.Pickup_1 = '0';
+
+        checkboxes = [];
         if ( document.getElementById('PickupHP').checked ) {
-            scoutingData.Pickup_1 = 'Floor';
+            checkboxes.push('Floor');
         }
-        scoutingData.Pickup_2 = '0';
         if ( document.getElementById('PickupHP1').checked ) {
-            scoutingData.Pickup_2 = 'Loading Station';
+            checkboxes.push('Loading_Station');
         }
+		scoutingData.Pit.Pickup_Hatch_Panels = checkboxes.join();
 		
-		scoutingData.PickupC = {};
-        scoutingData.PickupC_1 = '0';
+
+        checkboxes = [];
         if ( document.getElementById('PickupCF').checked ) {
-            scoutingData.PickupC_1 = 'Floor';
+            checkboxes.push('Floor');
         }
-        scoutingData.PickupC_2 = '0';
         if ( document.getElementById('PickupCF1').checked ) {
-            scoutingData.PickupC_2 = 'Loading Station';
+            checkboxes.push('Loading_Station');
         }
+		scoutingData.Pit.Pickup_Cargo = checkboxes.join();
 		
-		scoutingData.CrossHL = '';
+
+		scoutingData.Pit.Cross_Hab_Line = '';
 		if ( document.getElementById('Cross').checked ) {
-            scoutingData.CrossHL = 'Yes';
+            scoutingData.Pit.Cross_Hab_Line = 'Yes';
         } else if ( document.getElementById('Cross1').checked ) {
-            scoutingData.CrossHL = 'No';
+            scoutingData.Pit.Cross_Hab_Line = 'No';
         }
 		
-		scoutingData.SpeedRD = '';
+
+		scoutingData.Pit.Robot_Drive_Speed = '';
 		if ( document.getElementById('Speed').checked ) {
-            scoutingData.SpeedRD = 'Fast';
+            scoutingData.Pit.Robot_Drive_Speed = 'Fast';
         } else if ( document.getElementById('Speed1').checked ) {
-            scoutingData.SpeedRD = 'Medium';
+            scoutingData.Pit.Robot_Drive_Speed = 'Medium';
         } else if ( document.getElementById('Speed2').checked ) {
-            scoutingData.SpeedRD = 'Slow';
+            scoutingData.Pit.Robot_Drive_Speed = 'Slow';
         }
 		
-		scoutingData.ClimbsLS = {};
-        scoutingData.ClimbsLS_1 = '0';
-        if ( document.getElementById('ClimbsL').checked ) {
-            scoutingData.ClimbsLS_1 = 'Level 1';
+        checkboxes = [];
+        if ( document.getElementById('ClimbL').checked ) {
+            checkboxes.push('Level_1');
         }
-        scoutingData.ClimbsLS_2 = '0';
-        if ( document.getElementById('ClimbsL1').checked ) {
-            scoutingData.ClimbsLS_2 = 'Level 2';
+        if ( document.getElementById('ClimbL1').checked ) {
+            checkboxes.push('Level_2');
         }
-        scoutingData.ClimbsLS_3 = '0';
-        if ( document.getElementById('ClimbsL2').checked ) {
-            scoutingData.ClimbsLS_3 = 'Level 3';
+        if ( document.getElementById('ClimbL2').checked ) {
+            checkboxes.push('Level_3');
         }
+		scoutingData.Pit.Climb_Level = checkboxes.join();
 		
-		scoutingData.ClimbSS = '';
+
+		scoutingData.Pit.Climb_Speed = '';
 		if ( document.getElementById('ClimbS').checked ) {
-            scoutingData.ClimbSS = 'Fast';
+            scoutingData.Pit.Climb_Speed = 'Fast';
         } else if ( document.getElementById('ClimbS1').checked ) {
-            scoutingData.ClimbSS = 'Medium';
+            scoutingData.Pit.Climb_Speed = 'Medium';
         } else if ( document.getElementById('ClimbS2').checked ) {
-            scoutingData.ClimbSS = 'Slow';
+            scoutingData.Pit.Climb_Speed = 'Slow';
         }
 		
-		scoutingData.BClimb = {};
-        scoutingData.BClimb_1 = '0';
+
+        checkboxes = [];
         if ( document.getElementById('BuddyClimb').checked ) {
-            scoutingData.BClimb_1 = '1 Robot';
+            checkboxes.push('1_Robot');
         }
-        scoutingData.BClimb_2 = '0';
         if ( document.getElementById('BuddyClimb1').checked ) {
-            scoutingData.BClimb_2 = '2 Robots';
+            checkboxes.push('2_Robots');
         }
-        scoutingData.BClimb_3 = '0';
         if ( document.getElementById('BuddyClimb2').checked ) {
-            scoutingData.BClimb_3 = 'None';
+            checkboxes.push('None');
         }
+		scoutingData.Pit.Buddy_Climb = checkboxes.join();
+
 		
-		scoutingData.Pit.Buddy = document.getElementById('howclimb').value;
+		scoutingData.Pit.Buddy_Climb_Method = document.getElementById('howclimb').value;
 		
-		scoutingData.MultDT = '';
+
+		scoutingData.Pit.Multiple_Driveteams = '';
 		if ( document.getElementById('MultiD').checked ) {
-            scoutingData.MultDT = 'Yes';
+            scoutingData.Pit.Multiple_Driveteams = 'Yes';
         } else if ( document.getElementById('MultiD1').checked ) {
-            scoutingData.MultDT = 'No';
+            scoutingData.Pit.Multiple_Driveteams = 'No';
         }
 		
-		scoutingData.Many = '';
+
+		scoutingData.Pit.How_Many_Driveteams = '';
 		if ( document.getElementById('MultiM').checked ) {
-            scoutingData.Many = '2';
+            scoutingData.Pit.How_Many_Driveteams = '2';
         } else if ( document.getElementById('MultiM1').checked ) {
-            scoutingData.Many = '3';
+            scoutingData.Pit.How_Many_Driveteams = '3';
         } else if ( document.getElementById('MultiM2').checked ) {
-            scoutingData.Many = '4';
+            scoutingData.Pit.How_Many_Driveteams = '4';
         }
 		
 		scoutingData.Pit.Notes = document.getElementById('notes').value;
@@ -306,17 +533,18 @@
         // current settings and store to the browser's
         // local storage.
         //
-        scoutingInfo.scouter = scoutingData.Setup.Scouter;
+        scoutingInfo.scouter = scoutingData.Pit.Scouter;
         localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
 
         var season = settings.season.name;
         var eventCode = settings.competition.code;
-        var fileName = 'Team' + scoutingData.Pit.Team + '_Pit_' + scoutingData.Pit.Scouter;
+        var fileName = 'Pit_Team' + scoutingData.Pit.Team + '_' + scoutingData.Pit.Scouter;
         var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
 
-        var paramStr = '?sync=false';
+        //var paramStr = '?sync=false';
+        var paramStr = '';
         if ( settings.debug ) {
-            paramStr += '&debug=true';
+            paramStr = '?debug=true';
         }
 
         $.ajax({
@@ -328,12 +556,14 @@
                         xhr.setRequestHeader( 'Content-Type', 'application/json' );
                     },
                     success: function () {
+                        alert( 'Pit Scouting Data Saved To: ' + filepath );
                         console.log( 'Pit Scouting Data Saved To: ' + filepath );
                         location.reload();
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log(xhr.status);
                         console.log(thrownError);
+                        alert( 'Status: ' + xhr.status + ' Error: ' + thrownError );
                         location.reload();
                     }
         });
@@ -382,10 +612,69 @@
     $(document).ready(function() {
 
         loadSettings();
+        loadSeasons('season-selections');
+        loadCompetitions('competition-selections');
+        loadSyncMethods('sync-selections');
+
         loadScoutingSessionInfo();
+
+        $('#season-selections').on('click', '.dropdown-menu li a', function () {
+            setSeason( $(this).text() );
+        });
+        $('#season-selection').on('click', function () {
+            if ( !$('#season-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#season-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
+
+        $('#competition-selections').on('click', '.dropdown-menu li a', function () {
+            setCompetition( $(this).text() );
+        });
+        $('#competition-selection').on('click', function () {
+            if ( !$('#competition-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#competition-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
+        $('#sync-selections').on('click', '.dropdown-menu li a', function () {
+            setSyncMethod( $(this).text() );
+        });
+        $('#sync-selection').on('click', function () {
+            if ( !$('#sync-selections').hasClass('open') ) {
+                setTimeout(function(){
+                    $('#sync-selection-dropdown').dropdown('toggle');
+                }, 50);
+            }
+        });
+
+        $('#edit-settings-option').on('click', function () {
+            editSettings();
+        });
+
+        $('#save-option').on('click', function () {
+            saveScoutingData();
+        });
 
         $('#save-button').on('click', function () {
             saveScoutingData();
+        });
+
+        $('#update-app-all').on('click', function () {
+            updateScoutingAppAll();
+        });
+        $('#update-app-html').on('click', function () {
+            updateScoutingAppHTML();
+        });
+        $('#sync-option').on('click', function () {
+            syncScoutingFiles();
+        });
+        $('#sync-pictures').on('click', function () {
+            syncScoutingPictures();
         });
 
     });
@@ -400,13 +689,24 @@
 	</div>  
 	</div>
 
-	<nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
-		<div id="navbar" class="container">
-		<div class="col-lg-25">
+  <nav class="navbar navbar-color-on-scroll navbar-transparent navbar-expand-lg" color-on-scroll="100">
+    <div id=appNavbar class="container">
+
+      <div class="row navbar-translate">
+        <a class="navbar-brand" href="#save-button">
+        <img src="images/Flag.png" class="icon"></img> To Page Bottom
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
       <div class="row collapse navbar-collapse">
-		<button class="btn btn-primary btn-link">
-		<div class="ripple-container"></div>
-		</button>
+        <button class="btn btn-primary btn-link">
+        <div class="ripple-container"></div>
+        </button>
         <ul class="navbar-nav navbar-right">
           <li id="save-option" class="nav-item">
             <a href="#" class="nav-link">
@@ -433,11 +733,18 @@
               <img src="images/Import_Export.png" class="icon"></img> Sync
             </a>
           </li>
+          <li id="sync-pictures" class="nav-item">
+            <a href="#" class="nav-link">
+              <img src="images/Import_Export.png" class="icon"></img> Sync Pictures
+            </a>
+          </li>
         </ul>
       </div>
-	 </div>
-	 </div>
-	</nav>
+
+    </div>
+  </nav>
+
+
 	<div class="unspacer"></div>
   <div class="page-header header-filter" data-parallax="true" style="background-image: url('images/1073-UNH2.png')">
     <div class="container">
@@ -710,7 +1017,7 @@
 			<span class="form-check-sign"><span class="check"></span></span>
 		</label>
     </div>
-	<div> Robot scoring Hatch Panels in Rocket?
+	<div> Robot scoring Hatch Panels in Cargo Ship?
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="Does">
@@ -724,7 +1031,7 @@
 			<span class="circle"><span class="check"></span></span>
 		</label>
     </div>
-	<div> Robot scoring Cargo in Rocket?
+	<div> Robot scoring Cargo in Cargo Ship?
 	<div>
 	<div class="form-check form-check-inline">
 		<label class="form-check-label" for="DoesC">
@@ -930,3 +1237,7 @@
 	</div>
 	</div>
 	
+</body>
+
+</html>
+

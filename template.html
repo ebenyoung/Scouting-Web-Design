@@ -615,9 +615,9 @@
         $('#MatchNumberAdd').on('click', function () {
             buttonPlusMatch($('#MatchNumber'));
         });
-		$('#save-button').on('click', function () {
-			buttonPlusSpecial($('#MatchNumber'));
-		});
+		//$('#save-button').on('click', function () {
+			//buttonPlusSpecial($('#MatchNumber'));
+		//});
         $('#CargoButtonRemove3').on('click', function () {
             buttonMinus($('#CargoShip'));
         });
@@ -1188,7 +1188,7 @@
         </div>
         <div class="form-check form-check-inline">
             <div class="col-md-12 ml-auto">
-                <button id="save-button" class="btn btn-sm btn-primary btn-round">
+                <button id="save-button" onclick="successFunction()" class="btn btn-sm btn-primary btn-round">
                     <img src="images/Save.png" class="icon"></img>
                 </button>
             </div>
@@ -1211,6 +1211,10 @@
             location.reload(true);
 	    }
     }
+	function successFunction() {
+		if (confirm('Save Successful!!')==true) {
+		}
+	}
 	
     // When the user clicks on <div>, open the popup
     function TeamPositionInfo() {

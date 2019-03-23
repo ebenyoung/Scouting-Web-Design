@@ -260,7 +260,7 @@
     // and store the contents in a local file which will be synced to the
     // central scouting application
     //
-    function saveScoutingData() {
+    function saveScoutingData(overwrite) {
         var scoutingData = {};
 
         //
@@ -441,7 +441,7 @@
                         console.log( 'Scouting Data Saved To: ' + filepath );
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-					if (xhr.status == 405) {
+					if (xhr.status == 409) {
 						if (confirm('Do you want to overwrite with the new file')==true){
 						saveScoutingData(true);
 						

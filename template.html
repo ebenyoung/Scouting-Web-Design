@@ -302,6 +302,13 @@
             alert( 'Please Enter The Team Number' );
             return;
         }
+		
+		scoutingData.Setup.RoboDefence = '';
+		if ( document.getElementById('Defence').checked ) {
+            scoutingData.Setup.RoboDefence = 'Yes';
+        } else if ( document.getElementById('Defence1').checked ) {
+            scoutingData.Setup.RoboDefence = 'No';
+		} 
 
         scoutingData.Sandstorm = {};
 
@@ -323,6 +330,12 @@
         } else if ( document.getElementById('SandStormInline2').checked ) {
             scoutingData.Sandstorm.Level_3 = '1';
         }
+		
+		scoutingData.Sandstorm.Cargo = {};
+		scoutingData.Sandstorm.Cargo.CargoShip = $('#SandCargo').val();
+		scoutingData.Sandstorm.Cargo.Rocket = $('#SandCargo1').val();
+		scoutingData.Sandstorm.Hatch_Panels = $('#SandHP').val();
+		scoutingData.Sandstorm.Hatch_Panels = $('#SandHP1').val();
 
         scoutingData.Cargo = {};
         scoutingData.Cargo.Cargo_Ship = $('#CargoShip').val();
@@ -358,6 +371,14 @@
             scoutingData.End_Game.Level_3_Buddy_Climb = '1';
         }
 
+
+		scoutingData.End_Game.RoboPush = '';
+		if ( document.getElementById('Push').checked ) {
+            scoutingData.End_Game.RoboPush = 'Yes';
+        } else if ( document.getElementById('Push1').checked ) {
+            scoutingData.End_Game.RoboPush = 'No';
+		} 
+		
         scoutingData.End_Game.Foul = document.getElementById('Foul').value;
         scoutingData.End_Game.Tech_Foul = document.getElementById('TechFoul').value;
 		scoutingData.End_Game.Notes = document.getElementById('Notes').value;
@@ -546,6 +567,7 @@
 		if (value > 3)
 			elem.val(value - 1);
 	}
+	
 
     $(document).ready(function() {
 
@@ -689,6 +711,30 @@
 		});
 		$('#RPButtonAdd').on('click', function () {
             buttonPlusRP($('#RP'));
+		});
+		$('#SandstormButtonAdd').on('click', function () {
+            buttonPlus($('#SandCargo'));
+		});
+		$('#SandstormButtonRemove').on('click', function () {
+            buttonMinus($('#SandCargo'));
+		});
+		$('#SandstormButtonAdd1').on('click', function () {
+            buttonPlus($('#SandCargo1'));
+		});
+		$('#SandstormButtonRemove1').on('click', function () {
+            buttonMinus($('#SandCargo1'));
+		});
+		$('#SandstormButtonAdd2').on('click', function () {
+            buttonPlus($('#SandHP'));
+		});
+		$('#SandstormButtonRemove2').on('click', function () {
+            buttonMinus($('#SandHP'));
+		});
+		$('#SandstormButtonAdd3').on('click', function () {
+            buttonPlus($('#SandHP1'));
+		});
+		$('#SandstormButtonRemove3').on('click', function () {
+            buttonMinus($('#SandHP1'));
 		});
 
     });
@@ -942,6 +988,20 @@
                 </div>
             </div>
         </div>
+		<div> Robot Playing Defence?
+		<div>
+		<div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Defence">
+                        <input type="radio" class="form-check-input" id="Defence" name="RoboDefence">Yes
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+        </div>
+		<div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Defence1">
+                        <input type="radio" class="form-check-input" id="Defence1" name="RoboDefence">No
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
 
         <h2><a id="SandStorm">SandStorm</a></h2>
         <div> Starting Level: Hab Platform
@@ -980,6 +1040,50 @@
                         <span class="circle"><span class="check"></span></span>
                     </label>
                 </div>
+            </div>
+        </div>
+		<div> Cargo in Cargo ship during Sandstorm
+            <div class="col-md-12 ml-auto">
+                <button id="SandstormButtonRemove" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="SandCargo" type="text" value="0" min="0" max="8">
+                <button id="SandstormButtonAdd" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+		<div> Cargo in Rocket during Sandstorm
+            <div class="col-md-12 ml-auto">
+                <button id="SandstormButtonRemove1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="SandCargo1" type="text" value="0" min="0" max="8">
+                <button id="SandstormButtonAdd1" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+		<div> Hatch Panels in Cargo ship during Sandstorm
+            <div class="col-md-12 ml-auto">
+                <button id="SandstormButtonRemove2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="SandHP" type="text" value="0" min="0" max="8">
+                <button id="SandstormButtonAdd2" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
+            </div>
+        </div>
+		<div> Hatch Panels in Rocket during Sandstorm
+            <div class="col-md-12 ml-auto">
+                <button id="SandstormButtonRemove3" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/remove4.png" class="icon"></img>
+                </button>
+                <input id="SandHP1" type="text" value="0" min="0" max="8">
+                <button id="SandstormButtonAdd3" class="btn btn-sm btn-primary btn-round">
+                    <img src="images/add2.png" class="icon"></img>
+                </button>
             </div>
         </div>
 
@@ -1114,6 +1218,20 @@
                 </div>
             </div>
         </div>
+		<div> Robot Easily Pushed?
+		<div>
+		<div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Push">
+                        <input type="radio" class="form-check-input" id="Push" name="RoboPush">Yes
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+        </div>
+		<div class="form-check form-check-inline">
+                    <label class="form-check-label" for="Push1">
+                        <input type="radio" class="form-check-input" id="Push1" name="RoboPush">No
+                        <span class="circle"><span class="check"></span></span>
+                    </label>
+                </div>
         <div> Foul
             <div class="col-lg-14">
                 <button id="FoulButtonRemove" class="btn btn-sm btn-primary btn-round">

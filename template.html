@@ -274,9 +274,9 @@
         // with the individual fields
         //
         scoutingData.Setup = {};
-        scoutingData.Setup.Scouter = document.getElementById('scouter').value;
+        scoutingData.Setup.Scouter = document.getElementById('scouter').value.replace(/\s+/g, '').replace(/,/g, '-');
         scoutingData.Setup.Match = document.getElementById('MatchNumber').value;
-        if ( scoutingData.Setup.Match == '' ) {
+        if ( scoutingData.Setup.Match == '0' ) {
             alert( 'Please Enter The Match Number' );
             return;
         }
@@ -298,6 +298,10 @@
         }
             
         scoutingData.Setup.Team = document.getElementById('teamnumber').value;
+        if ( scoutingData.Setup.Team == '' ) {
+            alert( 'Please Enter The Team Number' );
+            return;
+        }
 
         scoutingData.Sandstorm = {};
 
@@ -389,8 +393,9 @@
         // configuration settings. - need to complete this part.
         var season = settings.season.name;
         var eventCode = settings.competition.code;
-        var fileName = 'Match' + scoutingData.Setup.Match + '_' + 
-                        scoutingData.Setup.Alliance + scoutingData.Setup.Position;
+        var fileName = 'Match' + scoutingData.Setup.Match + '_Team' + scoutingData.Setup.Team + '_' + 
+                        scoutingData.Setup.Alliance + scoutingData.Setup.Position + 
+                        '_' + scoutingData.Setup.Scouter;
         var filePath = '/static/data/' + eventCode + season + '/ScoutingData/' + fileName + '.json';
 
         var paramStr = '?sync=true';
@@ -401,14 +406,14 @@
         $.ajax({
             url: 'http://localhost:8080/sync' + filePath + paramStr,
                     type: 'PUT',
-                    data: JSON.stringify(scoutingData),
+                    data: JSON.stringify(scoutingData, null, 4),
                     crossDomain: true,
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader( 'Content-Type', 'application/json' );
                     },
                     success: function () {
+                        successFunction();
                         console.log( 'Scouting Data Saved To: ' + filepath );
-                        location.reload();
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log(xhr.status);
@@ -898,7 +903,7 @@
             <div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label" for="RobotInline">
-                        <input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">3
+                        <input type="radio" class="form-check-input" id="RobotInline" name="RoboPosition" value="option7">1
                         <span class="circle"><span class="check"></span></span>
                     </label>
                 </div>
@@ -910,7 +915,7 @@
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label" for="RobotInline2">
-                        <input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">1
+                        <input type="radio" class="form-check-input" id="RobotInline2" name="RoboPosition" value="option9">3
                         <span class="circle"><span class="check"></span></span>
                     </label>
                 </div>
@@ -1186,7 +1191,7 @@
         </div>
         <div class="form-check form-check-inline">
             <div class="col-md-12 ml-auto">
-                <button id="save-button" onclick="successFunction()" class="btn btn-sm btn-primary btn-round">
+                <button id="save-button" class="btn btn-sm btn-primary btn-round">
                     <img src="images/Save.png" class="icon"></img>
                 </button>
             </div>
@@ -1211,6 +1216,7 @@
     }
 	function successFunction() {
 		if (confirm('Save Successful!!')==true) {
+            location.reload(false);
 		}
 	}
 	

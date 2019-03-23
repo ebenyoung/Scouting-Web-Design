@@ -305,7 +305,8 @@
 
         // We will require a scouter name and team number, so check that 
         // those fields have been filled in.
-        scoutingData.Pit.Scouter = document.getElementById('scouter').value;
+        scoutingData.Pit.Scouter = document.getElementById('scouter').value.replace(/\s+/g, '').replace(/,/g, '-');
+
         if ( scoutingData.Pit.Scouter == '' ) {
             alert( 'Please Enter The Scouter Name' );
             return;
@@ -550,7 +551,7 @@
         $.ajax({
             url: 'http://localhost:8080/sync' + filePath + paramStr,
                     type: 'PUT',
-                    data: JSON.stringify(scoutingData),
+                    data: JSON.stringify(scoutingData, null, 4),
                     crossDomain: true,
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader( 'Content-Type', 'application/json' );

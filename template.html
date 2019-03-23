@@ -423,6 +423,10 @@
         if ( settings.debug ) {
             paramStr += '&debug=true';
         }
+		
+		if (overwrite = true){
+			var paramStr += '&overwrite=true';
+		}
 
         $.ajax({
             url: 'http://localhost:8080/sync' + filePath + paramStr,
@@ -437,6 +441,12 @@
                         console.log( 'Scouting Data Saved To: ' + filepath );
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
+					if xhr.status = 405;
+						if confirm('Do you want to overwrite with the new file')==true){
+						saveScoutingData(true);
+						
+					}
+					
                         console.log(xhr.status);
                         console.log(thrownError);
                         location.reload();
@@ -616,11 +626,11 @@
         });
 
         $('#save-option').on('click', function () {
-            saveScoutingData();
+            saveScoutingData(false);
         });
 
         $('#save-button').on('click', function () {
-            saveScoutingData();
+            saveScoutingData(false);
         });
 
         $('#update-app-all').on('click', function () {

@@ -424,8 +424,8 @@
             paramStr += '&debug=true';
         }
 		
-		if (overwrite = true){
-			var paramStr += '&overwrite=true';
+		if (overwrite == true){
+			 paramStr += '&overwrite=true';
 		}
 
         $.ajax({
@@ -441,17 +441,16 @@
                         console.log( 'Scouting Data Saved To: ' + filepath );
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-					if xhr.status = 405;
-						if confirm('Do you want to overwrite with the new file')==true){
+					if (xhr.status == 405) {
+						if (confirm('Do you want to overwrite with the new file')==true){
 						saveScoutingData(true);
 						
+						}
 					}
 					
-                        console.log(xhr.status);
-                        console.log(thrownError);
-                        location.reload();
+                        
                     }
-        });
+				});
     }
 
     //

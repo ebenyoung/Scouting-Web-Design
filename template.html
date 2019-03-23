@@ -441,14 +441,13 @@
                         console.log( 'Scouting Data Saved To: ' + filepath );
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
-					if (xhr.status == 405) {
-						if (confirm('Do you want to overwrite with the new file')==true){
+					if (xhr.status == 409) {
+						if (confirm('Do you want to overwrite with the new file?')==true){
 						saveScoutingData(true);
 						
 						}
 					}
-					
-                        
+					   
                     }
 				});
     }

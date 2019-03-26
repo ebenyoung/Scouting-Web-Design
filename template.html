@@ -303,13 +303,6 @@
             return;
         }
 		
-		scoutingData.Setup.RoboDefence = '';
-		if ( document.getElementById('Defence').checked ) {
-            scoutingData.Setup.RoboDefence = 'Yes';
-        } else if ( document.getElementById('Defence1').checked ) {
-            scoutingData.Setup.RoboDefence = 'No';
-		} 
-
         scoutingData.Sandstorm = {};
 
         scoutingData.Sandstorm.Starting_Pos = scoutingData.Setup.Alliance[0]+scoutingData.Setup.Position;
@@ -331,11 +324,10 @@
             scoutingData.Sandstorm.Level_3 = '1';
         }
 		
-		scoutingData.Sandstorm.Cargo = {};
-		scoutingData.Sandstorm.Cargo.CargoShip = $('#SandCargo').val();
-		scoutingData.Sandstorm.Cargo.Rocket = $('#SandCargo1').val();
-		scoutingData.Sandstorm.Hatch_Panels = $('#SandHP').val();
-		scoutingData.Sandstorm.Hatch_Panels = $('#SandHP1').val();
+		scoutingData.Sandstorm.Cargo_Cargo_Ship = $('#SandCargo').val();
+		scoutingData.Sandstorm.Cargo_Rocket = $('#SandCargo1').val();
+		scoutingData.Sandstorm.Hatch_Panels_Cargo_Ship = $('#SandHP').val();
+		scoutingData.Sandstorm.Hatch_Panels_Rocket = $('#SandHP1').val();
 
         scoutingData.Cargo = {};
         scoutingData.Cargo.Cargo_Ship = $('#CargoShip').val();
@@ -371,14 +363,6 @@
             scoutingData.End_Game.Level_3_Buddy_Climb = '1';
         }
 
-
-		scoutingData.End_Game.RoboPush = '';
-		if ( document.getElementById('Push').checked ) {
-            scoutingData.End_Game.RoboPush = 'Yes';
-        } else if ( document.getElementById('Push1').checked ) {
-            scoutingData.End_Game.RoboPush = 'No';
-		} 
-		
         scoutingData.End_Game.Foul = document.getElementById('Foul').value;
         scoutingData.End_Game.Tech_Foul = document.getElementById('TechFoul').value;
 		scoutingData.End_Game.Notes = document.getElementById('Notes').value;
@@ -399,6 +383,20 @@
 
         scoutingData.Match_Results.RP_Earned = '0';
 
+		scoutingData.Match_Results.Played_Defense = '';
+		if ( document.getElementById('Defence').checked ) {
+            scoutingData.Match_Results.Played_Defense = 'Yes';
+        } else if ( document.getElementById('Defence1').checked ) {
+            scoutingData.Match_Results.Played_Defense = 'No';
+		} 
+
+		scoutingData.Match_Results.Is_Easily_Pushed = '';
+		if ( document.getElementById('Push').checked ) {
+            scoutingData.Match_Results.Is_Easily_Pushed = 'Yes';
+        } else if ( document.getElementById('Push1').checked ) {
+            scoutingData.Match_Results.Is_Easily_Pushed = 'No';
+		} 
+		
         //
         // Update the scouting session information with the 
         // current settings and store to the browser's 
@@ -476,7 +474,7 @@
 
         $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
                 .done(function( data ) {
-                    setTimeout(function(){ location.reload; }, 5000);
+                    setTimeout(function(){ location.reload; }, 2000);
                 });
     }
     function updateScoutingAppHTML() {

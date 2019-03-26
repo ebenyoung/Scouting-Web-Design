@@ -231,9 +231,9 @@
     // Some of the parameters are currently hardcoded, but will be 
     // set through configuration
     //
-    function updateScoutingApp(paramStr) {
+    function updateScoutingApp(paramStr, method) {
         var updateCntrl = {};
-        updateCntrl.sync_method = 'HTTP';
+        updateCntrl.sync_method = method;
         updateCntrl.sync_control = 'Download_Updates';
         updateCntrl.paths = [ 'static/scouting-app/' ];
         updateCntrl.server_address = settings.server.ipaddress;
@@ -250,14 +250,17 @@
 
         $.post( 'http://localhost:8080/sync'+paramStr, updateCntrlJson )
                 .done(function( data ) {
-                    setTimeout(function(){ location.reload; }, 5000);
+                    setTimeout(function(){ location.reload; }, 2000);
                 });
     }
     function updateScoutingAppHTML() {
-        updateScoutingApp('');
+        updateScoutingApp('', 'HTTP');
+    }
+    function updateScoutingAppHTMLBlue() {
+        updateScoutingApp('', 'Bluetooth');
     }
     function updateScoutingAppAll() {
-        updateScoutingApp('?recurse=true');
+        updateScoutingApp('?recurse=true', 'HTTP');
     }
 
     //
@@ -671,6 +674,9 @@
         $('#update-app-html').on('click', function () {
             updateScoutingAppHTML();
         });
+        $('#update-app-html-blue').on('click', function () {
+            updateScoutingAppHTMLBlue();
+        });
         $('#sync-option').on('click', function () {
             syncScoutingFiles();
         });
@@ -722,6 +728,11 @@
           <li id="update-app-html" class="nav-item">
             <a href="#" class="nav-link">
               <img src="images/Apps.png" class="icon"></img> Update Scouting App
+            </a>
+          </li>
+          <li id="update-app-html-blue" class="nav-item">
+            <a href="#" class="nav-link">
+              <img src="images/Apps.png" class="icon"></img> Update App BlueTth
             </a>
           </li>
           <li id="update-app-all" class="nav-item">

@@ -246,6 +246,11 @@
                 document.getElementById('AllianceInline1').checked = true;
             }
 
+            if ( scoutingInfo.lastMatch == null ) {
+                scoutingInfo.lastMatch = '1';
+            }
+            $('#MatchNumber').attr('value',scoutingInfo.lastMatch);
+
         } catch(err) {
             console.log( 'No stored settings setting up defaults' );
 
@@ -405,6 +410,7 @@
         scoutingInfo.scouter = scoutingData.Setup.Scouter;
         scoutingInfo.alliance = scoutingData.Setup.Alliance;
         scoutingInfo.position = scoutingData.Setup.Position;
+        scoutingInfo.lastMatch = scoutingData.Setup.Match;
         localStorage.scoutingInfo = JSON.stringify( scoutingInfo );
 
         //
